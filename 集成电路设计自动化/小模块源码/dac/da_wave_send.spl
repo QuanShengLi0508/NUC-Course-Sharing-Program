@@ -1,0 +1,14 @@
+[Inputs]
+clk
+rst_n
+=rd_data[7:0]=
+=rd_data2[7:0]=
+=rd_data3[7:0]=
+=rd_data4[7:0]=
+=in1[1:0]=
+=in2[1:0]=
+[Outputs]
+da_clk
+=rd_addr[7:0]=
+=da_data[7:0]=
+[BiDir]

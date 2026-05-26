@@ -1,0 +1,172 @@
+# Ver 1.2 (.99v top)
+# Ver 1.3 VDD_0d81 names
+# Ver 1.4 iso on SRAM inputs & pst
+# Ver 1.5 PD_interleaver = .81v,
+#              LS inputs -self, LS outputs -parent
+# Ver 1.6 merge. Move map_retention to rtl_top.dc.upf. 
+#              Interleaver ISO supply to 0d81
+#              Interleaver-output ISO location to self
+# Ver 1.7 mem_ctrl isolation outputs must be connected to VDD_0d99
+# Ver 1.8 mem_ctrl power switch placed on VDD_0d81
+#--------------------------------------------------------------------
+# This sets the design top level 
+#--------------------------------------------------------------------
+set_design_top rtl_top
+set_scope .
+
+#--------------------------------------------------------------------
+# Create power domains
+#--------------------------------------------------------------------
+create_power_domain PD_top 
+create_power_domain PD_interleaver -elements {i0}
+create_power_domain PD_mem_ctrl    -elements {mc0}
+create_power_domain PD_sram        -elements {m1 m2 m3 m4}
+
+#--------------------------------------------------------------------
+# Create top level power domain supply ports
+#--------------------------------------------------------------------
+create_supply_port VDD_0d99 -domain PD_top
+create_supply_port VDD_0d81 -domain PD_top
+create_supply_port VSS      -domain PD_top
+
+#--------------------------------------------------------------------
+# Create power domain supply nets
+#--------------------------------------------------------------------
+create_supply_net VDD_0d99 -domain PD_top
+create_supply_net VDD_0d81 -domain PD_top
+create_supply_net VDD_0d81 -domain PD_interleaver -reuse
+create_supply_net VDD_0d81 -domain PD_mem_ctrl    -reuse
+create_supply_net VDD_0d99 -domain PD_sram        -reuse
+
+create_supply_net VSS -domain PD_top
+create_supply_net VSS -domain PD_interleaver -reuse
+create_supply_net VSS -domain PD_mem_ctrl    -reuse
+create_supply_net VSS -domain PD_sram        -reuse
+
+create_supply_net VDD_0d81_SW -domain PD_mem_ctrl
+
+#--------------------------------------------------------------------
+# Connect top level power domain supply ports to supply nets
+#--------------------------------------------------------------------
+connect_supply_net VDD_0d99 -ports VDD_0d99
+connect_supply_net VDD_0d81 -ports VDD_0d81
+connect_supply_net VSS      -ports VSS
+
+#--------------------------------------------------------------------
+# Set primary supplies for each power domain
+#--------------------------------------------------------------------
+set_domain_supply_net PD_top \
+    -primary_power_net VDD_0d99 \
+    -primary_ground_net VSS 
+set_domain_supply_net PD_interleaver \
+    -primary_power_net VDD_0d81 \
+    -primary_ground_net VSS
+set_domain_supply_net PD_mem_ctrl \
+    -primary_power_net VDD_0d81_SW \
+    -primary_ground_net VSS
+set_domain_supply_net PD_sram \
+    -primary_power_net VDD_0d99 \
+    -primary_ground_net VSS
+
+#--------------------------------------------------------------------
+# Create power switch for memory controller domain - switch on
+# ground side of supply network
+#--------------------------------------------------------------------
+create_power_switch mem_ctrl_sw \
+    -domain PD_mem_ctrl \
+    -output_supply_port {vout_p VDD_0d81_SW} \
+    -input_supply_port {vin_p VDD_0d81} \
+    -control_port {ctrl_p mc_pwr_c} \
+    -on_state {normal_working vin_p {ctrl_p}} \
+    -off_state {off_state {!ctrl_p}}
+
+#--------------------------------------------------------------------
+# Setup retention strategy for memory controller domain
+#--------------------------------------------------------------------
+set_retention mem_ctrl_ret \
+    -domain PD_mem_ctrl \
+    -retention_power_net VDD_0d81
+set_retention_control mem_ctrl_ret \
+    -domain PD_mem_ctrl \
+    -save_signal {mc_save_c high} \
+    -restore_signal {mc_restore_c low}
+
+#--------------------------------------------------------------------
+# Retention Flip-Flop Mapping
+#--------------------------------------------------------------------
+# For Simulation
+# map_retention_cell mem_ctrl_ret \
+#     -domain PD_mem_ctrl \
+#     -lib_cell_type FF_CKHI \
+#     -lib_model_name pa_ff_ckhi
+
+#--------------------------------------------------------------------
+# Setup ioslation strategy for memory controller domain
+#--------------------------------------------------------------------
+# Memory controller chip & write enables: clamp value of '1'
+set_isolation mem_ctrl_iso_1 \
+    -domain PD_mem_ctrl \
+    -isolation_power_net VDD_0d99 \
+    -isolation_ground_net VSS \
+    -clamp_value 1 \
+    -elements {mc0/ceb mc0/web}
+set_isolation_control mem_ctrl_iso_1 \
+    -domain PD_mem_ctrl \
+    -isolation_signal mc_iso_c \
+    -isolation_sense high \
+    -location parent
+# All other outputs on memory controller: clamp value of '0'
+set_isolation mem_ctrl_iso_0 \
+    -domain PD_mem_ctrl \
+    -isolation_power_net VDD_0d99 \
+    -isolation_ground_net VSS \
+    -clamp_value 0 \
+    -elements {mc0/do_acpt mc0/addr}
+set_isolation_control mem_ctrl_iso_0 \
+    -domain PD_mem_ctrl \
+    -isolation_signal mc_iso_c \
+    -isolation_sense high \
+    -location parent
+
+#--------------------------------------------------------------------
+# Create power state table and add power states
+#--------------------------------------------------------------------
+
+add_port_state VDD_0d99           -state {ON_STATE  0.99 1.10 1.21}
+add_port_state VDD_0d81           -state {ON_STATE  0.81 0.90 0.99}
+add_port_state mem_ctrl_sw/vout_p -state {ON_STATE  0.81 0.90 0.99}
+add_port_state mem_ctrl_sw/vout_p -state {OFF_STATE off}
+add_port_state VSS                -state {ON_STATE 0 0 0}
+
+create_pst top_pst                -supplies {VDD_0d99 VDD_0d81      VSS mem_ctrl_sw/vout_p}
+add_pst_state ON_STATE  -pst top_pst -state {ON_STATE ON_STATE ON_STATE           ON_STATE}
+add_pst_state OFF_STATE -pst top_pst -state {ON_STATE ON_STATE ON_STATE          OFF_STATE}
+
+#--------------------------------------------------------------------
+# Define level shifters
+#--------------------------------------------------------------------
+# want LS on all .99-.81v ports of mc0
+# outputs must be in parent to get .81-.99v supply
+
+set_level_shifter mem_ctrl_ls_in \
+    -domain PD_mem_ctrl \
+    -applies_to inputs \
+    -location self
+
+set_level_shifter mem_ctrl_ls_out \
+    -domain PD_mem_ctrl \
+    -applies_to outputs \
+    -location parent
+
+# want LS on all .99-.81v ports of Interleaver i0
+# outputs must be in parent to get .81-.99v supply
+
+set_level_shifter interleaver_ls_in \
+    -domain PD_interleaver \
+    -applies_to inputs \
+    -location self
+
+set_level_shifter interleaver_ls_out \
+    -domain PD_interleaver \
+    -applies_to outputs \
+    -location parent

@@ -1,0 +1,9 @@
+xst -intstyle ise -ifn "C:/IES111/dac/ad_da.xst" -ofn "C:/IES111/dac/ad_da.syr" 
+xst -intstyle ise -ifn "C:/IES111/dac/ad_da.xst" -ofn "C:/IES111/dac/ad_da.syr" 
+xst -intstyle ise -ifn "C:/IES111/dac/ad_da.xst" -ofn "C:/IES111/dac/ad_da.syr" 
+xst -intstyle ise -ifn "C:/IES111/dac/ad_da.xst" -ofn "C:/IES111/dac/ad_da.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -i -p xc6slx16-ftg256-2 ad_da.ngc ad_da.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o ad_da_map.ncd ad_da.ngd ad_da.pcf 
+par -w -intstyle ise -ol high -mt off ad_da_map.ncd ad_da.ncd ad_da.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml ad_da.twx ad_da.ncd -o ad_da.twr ad_da.pcf 
+bitgen -intstyle ise -f ad_da.ut ad_da.ncd 

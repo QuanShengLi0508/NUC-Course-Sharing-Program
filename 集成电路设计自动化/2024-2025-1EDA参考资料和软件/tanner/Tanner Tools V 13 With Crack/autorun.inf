@@ -1,0 +1,4 @@
+[autorun]
+ACTION=Install Tanner Tools
+OPEN=setup.exe
+ICON=setup.ico

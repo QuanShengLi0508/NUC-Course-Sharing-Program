@@ -1,0 +1,6 @@
+[Inputs]
+clk
+rst_n
+[Outputs]
+=q[1:0]=
+[BiDir]

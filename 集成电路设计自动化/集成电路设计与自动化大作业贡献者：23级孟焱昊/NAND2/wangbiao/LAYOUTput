@@ -1,0 +1,115 @@
+File written by LVS 16.30 as a result of: "" on Mon Dec 22 11:17:20 2025
+
+Command line:
+lvs64 "D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\NAND2.spc" "D:\BaiduNetdiskDownload\example1\2yufeimen\2shuruyufeimen.spc" -o "D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\LAYOUTput" -TTSPICE -nrclf 
+
+Engine configuration report:
+Layout netlist file.............................................. D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\NAND2.spc
+Layout netlist file format....................................... T-Spice
+Layout cell...................................................... <toplevel>
+Schematic netlist file........................................... D:\BaiduNetdiskDownload\example1\2yufeimen\2shuruyufeimen.spc
+Schematic netlist file format.................................... T-Spice
+Schematic cell................................................... <toplevel>
+Consider Bulk nodes.............................................. TRUE
+By default, FET S/D terminals are swappable...................... TRUE
+By default, BJT C/E terminals are swappable...................... FALSE
+By default, Resistors are polarized elements..................... FALSE
+By default, Capacitors are polarized elements.................... FALSE
+By default, Inductors are polarized elements..................... FALSE
+Merge series and parallel R...................................... OFF
+Merge series and parallel C...................................... OFF
+Merge series and parallel L...................................... OFF
+Merge parallel M................................................. OFF
+Merge stacked M.................................................. OFF
+Merge parallel D................................................. OFF
+Merge parallel B................................................. OFF
+Merge parallel J................................................. OFF
+Merge parallel Z................................................. OFF
+Merge parallel Q................................................. OFF
+Merge series MOSFETs............................................. OFF
+Find series MOSFETs that differ in order or parameter value...... OFF
+Merge split-gate series MOSFETs.................................. OFF
+Remove shorted devices........................................... OFF
+Remove disconnected devices...................................... OFF
+Fast Iteration................................................... OFF
+
+
+Parsing file D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\NAND2.spc...
+Flattening netlist...
+Flattening netlist (second pass)...
+
+Parsing file D:\BaiduNetdiskDownload\example1\2yufeimen\2shuruyufeimen.spc...
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: tt
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: TT_NMOS_PARAMETERS
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: TT_PMOS_PARAMETERS
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: MOS_BIN_MODEL
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: Typ
+Reading library file D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib label: RES_CAP
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, ;, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, 104, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, aF, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, per, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, square, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(255) Incomplete parameter statement, micron, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(256) Incomplete parameter statement, ;, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(256) Incomplete parameter statement, 50, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(256) Incomplete parameter statement, aF, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(256) Incomplete parameter statement, per, 
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(256) Incomplete parameter statement, micron, 
+Warning: 2shuruyufeimen.spc(26) Node Gnd aliased to GROUND
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(258) Node 0 aliased to GROUND
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(259) Ignoring unrecognizable R parameter TC1
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(259) Ignoring unrecognizable R parameter TC2
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(259) Ignoring unrecognizable R parameter DTEMP
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(259) Ignoring unrecognizable R parameter SCALE
+Warning: D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib(259) Ignoring unrecognizable R parameter NOISE
+Warning: 2shuruyufeimen.spc(34) Did not recognize and will ignore Spice statement: .tran
+Flattening netlist...
+Flattening netlist (second pass)...
+
+Device                       NAND2.spc 2shuruyufeimen.spc   Status              
+---------------        ---------------   ---------------   ---------------     
+M_NMOS                               2                 1   MISMATCH (1)
+M_PMOS                               2                 1   MISMATCH (1)
+                          ------------      ------------
+Total elements                       4                 2   MISMATCH (2)
+Total nodes                          6                 5   MISMATCH (1)
+Single-pin nodes                     0                 2   MISMATCH (-2)
+                          ------------      ------------
+Connected nodes                      6                 3
+
+
+Iterating...
+  5% done.
+ 10% done.
+ 15% done.
+ 20% done.
+ 25% done.
+ 30% done.
+ 35% done.
+ 40% done.
+ 45% done.
+ 50% done.
+ 55% done.
+ 60% done.
+ 65% done.
+ 70% done.
+ 75% done.
+ 80% done.
+ 85% done.
+ 90% done.
+ 95% done.
+100% done.
+0 perfectly matched element classes.
+2 fragmented element classes.
+0 perfectly matched node classes.
+9 fragmented node classes.
+
+
+
+************************** FINAL RESULT *****************************
+
+Circuits are not equal.
+Run time: 0:07 (min:sec)
+
+0 errors, 19 warnings

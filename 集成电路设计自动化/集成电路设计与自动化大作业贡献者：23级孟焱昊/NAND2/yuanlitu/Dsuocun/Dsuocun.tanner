@@ -1,0 +1,7 @@
+workspace loadfrom -path .
+cell open -design Dsuocun -cell Dlatch -type schematic -newwindow
+window move -left 192 -top 192 -width 1220 -height 607 -undock -max 
+window fit -x0 -4523 -y0 -4349 -x1 7317 -y1 2449 -units iu
+workspace dockinglayout load -file dockinglayout.xml
+source open.design -relativeto user -encoding utf-8
+source open.design -relativeto design -encoding utf-8

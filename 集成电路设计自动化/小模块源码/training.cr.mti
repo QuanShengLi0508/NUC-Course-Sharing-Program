@@ -1,0 +1,15 @@
+D:/MOdelsim/examples/counter.v {1 {vlog -work work -vopt D:/MOdelsim/examples/counter.v
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module counter
+
+Top level modules:
+	counter
+
+} {} {}} D:/MOdelsim/examples/counter_tb.v {1 {vlog -work work -vopt D:/MOdelsim/examples/counter_tb.v
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module counter_tb
+
+Top level modules:
+	counter_tb
+
+} {} {}}

@@ -1,0 +1,8 @@
+[Inputs]
+clk
+rst_n
+=ad_data[7:0]=
+[Outputs]
+ad_clk
+=ad_out[7:0]=
+[BiDir]

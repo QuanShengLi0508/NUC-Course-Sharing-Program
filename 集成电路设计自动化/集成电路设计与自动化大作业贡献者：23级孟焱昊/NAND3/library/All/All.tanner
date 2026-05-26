@@ -1,0 +1,4 @@
+workspace loadfrom -path .
+workspace dockinglayout load -file {.\dockinglayout.xml}
+source open.design -relativeto user
+source open.design -relativeto design

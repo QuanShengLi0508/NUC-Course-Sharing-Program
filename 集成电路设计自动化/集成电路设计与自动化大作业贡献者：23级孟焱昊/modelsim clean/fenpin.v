@@ -1,0 +1,11 @@
+module fenpin(clk,rst,out);
+  input clk;
+  input rst;
+  output out;
+reg out;
+always@(posedge clk)
+ begin
+     if (!rst)  out<=0;
+     else out<=~out;
+     end
+  endmodule

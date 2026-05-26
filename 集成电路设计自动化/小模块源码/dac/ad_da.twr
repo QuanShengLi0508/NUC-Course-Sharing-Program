@@ -1,0 +1,149 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 2
+-n 3 -fastpaths -xml ad_da.twx ad_da.ncd -o ad_da.twr ad_da.pcf
+
+Design file:              ad_da.ncd
+Physical constraint file: ad_da.pcf
+Device,package,speed:     xc6slx16,ftg256,C,-2 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Setup/Hold to clock key1
+------------+------------+------------+------------+------------+------------------+--------+
+            |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
+Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
+------------+------------+------------+------------+------------+------------------+--------+
+sys_rst_n   |    1.837(F)|      SLOW  |   -0.878(F)|      FAST  |XLXN_16           |   0.000|
+------------+------------+------------+------------+------------+------------------+--------+
+
+Setup/Hold to clock key2
+------------+------------+------------+------------+------------+------------------+--------+
+            |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
+Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
+------------+------------+------------+------------+------------+------------------+--------+
+sys_rst_n   |    2.242(F)|      SLOW  |   -1.026(F)|      FAST  |XLXN_18           |   0.000|
+------------+------------+------------+------------+------------+------------------+--------+
+
+Setup/Hold to clock sys_clk
+------------+------------+------------+------------+------------+------------------+--------+
+            |Max Setup to|  Process   |Max Hold to |  Process   |                  | Clock  |
+Source      | clk (edge) |   Corner   | clk (edge) |   Corner   |Internal Clock(s) | Phase  |
+------------+------------+------------+------------+------------+------------------+--------+
+ad_data<0>  |    1.133(R)|      SLOW  |   -0.226(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<1>  |    1.324(R)|      SLOW  |   -0.331(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<2>  |    0.744(R)|      SLOW  |    0.143(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<3>  |    0.577(R)|      SLOW  |    0.377(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<4>  |    0.788(R)|      SLOW  |    0.237(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<5>  |    0.845(R)|      SLOW  |    0.260(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<6>  |    0.966(R)|      SLOW  |    0.070(R)|      SLOW  |XLXN_24           |   0.000|
+ad_data<7>  |    0.534(R)|      SLOW  |    0.557(R)|      SLOW  |XLXN_24           |   0.000|
+sys_rst_n   |    0.967(R)|      SLOW  |    0.792(R)|      SLOW  |XLXN_23           |   0.000|
+            |    2.677(R)|      SLOW  |   -0.239(R)|      SLOW  |XLXN_24           |   0.000|
+------------+------------+------------+------------+------------+------------------+--------+
+
+Clock key1 to Pad
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+da_data<0>  |        11.127(F)|      SLOW  |         5.020(F)|      FAST  |XLXN_16           |   0.000|
+da_data<1>  |        10.630(F)|      SLOW  |         4.646(F)|      FAST  |XLXN_16           |   0.000|
+da_data<2>  |        10.535(F)|      SLOW  |         4.773(F)|      FAST  |XLXN_16           |   0.000|
+da_data<3>  |        10.313(F)|      SLOW  |         4.605(F)|      FAST  |XLXN_16           |   0.000|
+da_data<4>  |        10.380(F)|      SLOW  |         4.480(F)|      FAST  |XLXN_16           |   0.000|
+da_data<5>  |         9.603(F)|      SLOW  |         4.116(F)|      FAST  |XLXN_16           |   0.000|
+da_data<6>  |        10.152(F)|      SLOW  |         4.509(F)|      FAST  |XLXN_16           |   0.000|
+da_data<7>  |        10.197(F)|      SLOW  |         4.552(F)|      FAST  |XLXN_16           |   0.000|
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+Clock sys_clk to Pad
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+            |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+ad_clk      |         9.081(R)|      SLOW  |         3.737(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<0>   |         8.646(R)|      SLOW  |         3.554(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<1>   |         8.916(R)|      SLOW  |         3.734(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<2>   |         8.781(R)|      SLOW  |         3.665(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<3>   |         8.995(R)|      SLOW  |         3.778(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<4>   |         8.696(R)|      SLOW  |         3.560(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<5>   |         8.955(R)|      SLOW  |         3.729(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<6>   |         8.831(R)|      SLOW  |         3.671(R)|      FAST  |XLXN_24           |   0.000|
+ad_out<7>   |         9.045(R)|      SLOW  |         3.784(R)|      FAST  |XLXN_24           |   0.000|
+da_data<0>  |        14.833(R)|      SLOW  |         6.235(R)|      FAST  |XLXN_23           |   0.000|
+da_data<1>  |        14.692(R)|      SLOW  |         6.004(R)|      FAST  |XLXN_23           |   0.000|
+da_data<2>  |        14.688(R)|      SLOW  |         6.077(R)|      FAST  |XLXN_23           |   0.000|
+da_data<3>  |        14.660(R)|      SLOW  |         6.166(R)|      FAST  |XLXN_23           |   0.000|
+da_data<4>  |        14.883(R)|      SLOW  |         6.768(R)|      FAST  |XLXN_23           |   0.000|
+da_data<5>  |        14.427(R)|      SLOW  |         6.618(R)|      FAST  |XLXN_23           |   0.000|
+da_data<6>  |        14.908(R)|      SLOW  |         6.789(R)|      FAST  |XLXN_23           |   0.000|
+da_data<7>  |        14.772(R)|      SLOW  |         6.775(R)|      FAST  |XLXN_23           |   0.000|
+------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+Clock to Setup on destination clock key1
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key1           |         |         |         |    1.384|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock key2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key2           |         |         |         |    1.385|
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock sys_clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key2           |         |    1.777|         |         |
+sys_clk        |    3.541|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+sys_clk        |da_clk         |    9.187|
+---------------+---------------+---------+
+
+
+Analysis completed Sat Nov 16 15:58:30 2024 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 218 MB
+
+
+
