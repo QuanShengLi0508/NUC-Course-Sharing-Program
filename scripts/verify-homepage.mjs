@@ -8,17 +8,34 @@ const resourceIndex = JSON.parse(indexJson);
 
 const checks = [
   ["html", html, "NUC Course Hub"],
-  ["html", html, "中北大学课程资料"],
+  ["html", html, "NUC-Course-<br>Sharing-Program"],
+  ["html", html, "./assets/nuc-emblem.jpg"],
   ["html", html, 'id="searchInput"'],
   ["html", html, 'id="courseFilter"'],
   ["html", html, 'id="typeFilter"'],
   ["html", html, 'id="courseSlider"'],
-  ["html", html, 'href="./css/styles.css?v=20260526-retro"'],
-  ["html", html, 'script type="module" src="./js/app.js?v=20260526-retro"'],
+  ["html", html, 'id="contribute"'],
+  ["html", html, 'id="contributionForm"'],
+  ["html", html, 'id="commentForm"'],
+  ["html", html, 'id="notificationButton"'],
+  ["html", html, 'id="notificationPanel"'],
+  ["html", html, "匿名"],
+  ["html", html, 'href="./css/styles.css?v=20260526-contribute-download"'],
+  ["html", html, 'script type="module" src="./js/app.js?v=20260526-contribute-download"'],
   ["css", css, "--paper: #eee9dc"],
   ["css", css, "--paper-strong: #f8f3e8"],
   ["css", css, "--yellow: #f0b90b"],
   ["css", css, "--shadow: 6px 6px 0 var(--line)"],
+  ["css", css, "margin: -12px 0 0"],
+  ["css", css, ".brand-mark img"],
+  ["css", css, "object-position: left center"],
+  ["css", css, ".hero-title"],
+  ["css", css, "transition: transform .14s ease"],
+  ["css", css, "transform: translate(4px, 4px)"],
+  ["css", css, ".course-file-row:focus-within"],
+  ["css", css, ".course-action-link"],
+  ["css", css, ".contribute-stage"],
+  ["css", css, ".comment-stage"],
   ["css", css, ".terminal-card"],
   ["css", css, ".metric-grid"],
   ["css", css, ".directory-shell"],
@@ -29,6 +46,18 @@ const checks = [
   ["js", js, "blockedPattern"],
   ["js", js, "Tanner Tools"],
   ["js", js, "modelsim"],
+  ["js", js, "githubRawBase"],
+  ["js", js, "downloadDirectoryBase"],
+  ["js", js, "packageLikePattern"],
+  ["js", js, "collapsePackageEntries"],
+  ["js", js, "initAutoSlide"],
+  ["js", js, "pauseAutoSlide"],
+  ["js", js, "全部下载"],
+  ["js", js, "openIssueUrl"],
+  ["js", js, "issuesApi"],
+  ["js", js, "notificationKey"],
+  ["js", js, "contributionForm"],
+  ["js", js, "commentForm"],
   ["js", js, "download_url"],
   ["js", js, "groupResourcesByCourse"],
   ["js", js, "renderCourseIndex"],
@@ -70,7 +99,23 @@ if (!hasCoursePdf) {
   process.exit(1);
 }
 
-const exposesBlockedInstaller = resourceIndex.tree.some((item) => /Crack|Tanner Tools|modelsim|tanner|破解器|破解|\.exe$|\.zip$/i.test(item.path));
+if (/raw\.githubusercontent\.com/.test(js)) {
+  console.error("Homepage verification failed. js/app.js still links downloads through raw.githubusercontent.com.");
+  process.exit(1);
+}
+
+if (!/assets\\\//.test(js) || !/assets\\\//.test(readFileSync(new URL("./generate-resource-index.mjs", import.meta.url), "utf8"))) {
+  console.error("Homepage verification failed. assets/ must be hidden from the public course index.");
+  process.exit(1);
+}
+
+const hasPackageEntry = resourceIndex.tree.some((item) => item.type === "package" && item.path.includes("/"));
+if (!hasPackageEntry) {
+  console.error("Homepage verification failed. data/resource-index.json has no collapsed package entries.");
+  process.exit(1);
+}
+
+const exposesBlockedInstaller = resourceIndex.tree.some((item) => /Crack|Tanner Tools|tanner|破解器|破解|patched?|keygen|MentorKG|安装包|驱动|\.exe$|\.cab$|\.msi$|\.dll$|\.iso$|\.rar$|\.rar\.[0-9]+$|\.zip$|\.7z$|\.dmg$/i.test(item.path));
 if (exposesBlockedInstaller) {
   console.error("Homepage verification failed. data/resource-index.json includes blocked installer or crack-like paths.");
   process.exit(1);

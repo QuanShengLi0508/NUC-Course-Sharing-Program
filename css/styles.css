@@ -73,24 +73,22 @@
       }
 
       .brand-mark {
-        width: 44px;
-        height: 44px;
-        display: grid;
-        place-items: center;
+        width: 54px;
+        height: 54px;
+        display: block;
         flex: 0 0 auto;
         border: 3px solid var(--line);
-        background:
-          linear-gradient(90deg, transparent 0 16%, var(--red) 16% 32%, transparent 32% 68%, var(--red) 68% 84%, transparent 84%),
-          linear-gradient(var(--paper-strong) 0 34%, #f5b397 34% 70%, transparent 70%);
+        background: #fffaf0;
         box-shadow: 3px 3px 0 var(--line);
+        overflow: hidden;
       }
 
-      .brand-mark::after {
-        content: "";
-        width: 6px;
-        height: 6px;
-        background: var(--line);
-        box-shadow: 14px 0 0 var(--line), 7px 8px 0 var(--line);
+      .brand-mark img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: left center;
       }
 
       .brand-title {
@@ -124,7 +122,8 @@
       }
 
       .nav a,
-      .status-pill {
+      .status-pill,
+      .notification-button {
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -133,6 +132,97 @@
         background: rgba(248, 243, 232, .64);
         padding: 7px 12px;
         text-decoration: none;
+      }
+
+      .notification-widget {
+        position: relative;
+      }
+
+      .notification-button {
+        position: relative;
+        width: 40px;
+        justify-content: center;
+        padding: 7px;
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .notification-button svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .notification-dot {
+        position: absolute;
+        top: -9px;
+        right: -9px;
+        min-width: 19px;
+        height: 19px;
+        display: inline-grid;
+        place-items: center;
+        border: 2px solid var(--paper);
+        background: var(--red);
+        color: #fffaf0;
+        font-size: 10px;
+        line-height: 1;
+      }
+
+      .notification-panel {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        z-index: 40;
+        width: min(330px, calc(100vw - 32px));
+        border: 3px solid var(--line);
+        background: #fffaf0;
+        box-shadow: var(--shadow);
+        padding: 12px;
+      }
+
+      .notification-head,
+      .notification-item {
+        display: grid;
+        gap: 4px;
+      }
+
+      .notification-head {
+        grid-template-columns: 1fr auto;
+        align-items: baseline;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--line);
+        margin-bottom: 10px;
+      }
+
+      .notification-head span,
+      .notification-item small {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .notification-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .notification-item {
+        border: 2px solid rgba(28, 27, 24, .72);
+        background: rgba(248, 243, 232, .82);
+        padding: 9px;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .notification-empty {
+        margin: 0;
+        color: var(--muted);
+        text-transform: none;
+        letter-spacing: 0;
       }
 
       .status-dot {
@@ -159,11 +249,16 @@
         text-transform: uppercase;
       }
 
-      h1 {
-        margin: 0;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-        font-size: clamp(46px, 9vw, 116px);
-        line-height: .9;
+      h1,
+      .hero-title {
+        margin: -12px 0 0;
+        font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: clamp(32px, 5.6vw, 76px);
+        line-height: .92;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-shadow: 2px 0 0 var(--ink), 0 2px 0 var(--ink);
+        max-width: 980px;
       }
 
       .hero-copy {
@@ -189,6 +284,37 @@
         border: 3px solid var(--line);
         background: rgba(248, 243, 232, .78);
         box-shadow: var(--shadow);
+      }
+
+      .metric-card,
+      .course-column,
+      .course-file-row,
+      .resource-card,
+      .snapshot-card {
+        transition: transform .14s ease, box-shadow .14s ease, background-color .14s ease, border-color .14s ease;
+      }
+
+      .metric-card:hover,
+      .course-column:hover,
+      .resource-card:hover,
+      .snapshot-card:hover {
+        box-shadow: 8px 8px 0 var(--line);
+      }
+
+      .metric-card:active,
+      .course-column:active,
+      .course-file-row:active,
+      .resource-card:active,
+      .snapshot-card:active {
+        transform: translate(4px, 4px);
+        box-shadow: 2px 2px 0 var(--line);
+        background: #fff1bd;
+      }
+
+      .course-file-row:focus-within,
+      .course-column:focus-within {
+        border-color: var(--yellow);
+        box-shadow: 4px 4px 0 var(--yellow);
       }
 
       .terminal-card {
@@ -455,6 +581,42 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
         font-size: 11px;
         font-weight: 900;
+      }
+
+      .course-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .course-action-link {
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--line);
+        background: var(--yellow);
+        color: var(--ink);
+        padding: 6px 10px;
+        text-decoration: none;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .course-action-link:hover,
+      .course-action-link:focus-visible {
+        background: #ffd75a;
+        outline: 0;
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0 var(--line);
+      }
+
+      .course-action-link:active {
+        transform: translate(3px, 3px);
+        box-shadow: 1px 1px 0 var(--line);
       }
 
       .course-file-list {
@@ -760,6 +922,131 @@
         line-height: 1.75;
       }
 
+      .contribute-stage,
+      .comment-stage {
+        padding: 10px clamp(18px, 5vw, 72px) 58px;
+      }
+
+      .submit-panel {
+        display: grid;
+        gap: 16px;
+        border: 3px solid var(--line);
+        background:
+          linear-gradient(90deg, rgba(240, 185, 11, .18), transparent 34%),
+          rgba(248, 243, 232, .88);
+        box-shadow: var(--shadow);
+        padding: clamp(16px, 3vw, 24px);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .textarea-line {
+        min-height: 108px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        resize: vertical;
+        line-height: 1.55;
+      }
+
+      .check-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        min-height: 38px;
+        border: 2px solid var(--line);
+        background: #fffaf0;
+        padding: 7px 10px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .check-line input {
+        width: 17px;
+        height: 17px;
+        accent-color: var(--yellow);
+      }
+
+      .submit-button {
+        width: fit-content;
+        min-height: 44px;
+        border: 3px solid var(--line);
+        border-radius: 0;
+        background: var(--yellow);
+        color: var(--ink);
+        padding: 9px 18px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+        box-shadow: 4px 4px 0 var(--line);
+        cursor: pointer;
+      }
+
+      .submit-button:hover,
+      .submit-button:focus-visible {
+        background: #ffd75a;
+        outline: 0;
+        transform: translate(-1px, -1px);
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .submit-button:active {
+        transform: translate(3px, 3px);
+        box-shadow: 1px 1px 0 var(--line);
+      }
+
+      .comment-feed {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .comment-card {
+        min-height: 96px;
+        display: grid;
+        align-content: space-between;
+        gap: 12px;
+        border: 3px solid var(--line);
+        background: #fffaf0;
+        box-shadow: 4px 4px 0 var(--line);
+        padding: 13px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .comment-card:hover,
+      .comment-card:focus-visible {
+        background: var(--green-soft);
+        outline: 0;
+        transform: translate(-1px, -1px);
+        box-shadow: 5px 5px 0 var(--line);
+      }
+
+      .comment-card strong {
+        font-size: 14px;
+        line-height: 1.35;
+        word-break: break-word;
+      }
+
+      .comment-card span {
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 11px;
+        word-break: break-word;
+      }
+
+      .comment-card.is-empty {
+        background: rgba(255, 250, 240, .74);
+      }
+
       .empty-state {
         display: none;
       }
@@ -814,6 +1101,8 @@
         .nav {
           width: 100%;
           justify-content: flex-start;
+          gap: 8px;
+          font-size: 11px;
         }
 
         .hero {
@@ -823,8 +1112,29 @@
         .filter-grid,
         .metric-grid,
         .resource-grid,
-        .snapshot-grid {
+        .snapshot-grid,
+        .form-grid,
+        .comment-feed {
           grid-template-columns: 1fr;
+        }
+
+        .course-column {
+          flex-basis: min(86vw, 380px);
+          min-height: 500px;
+        }
+
+        .course-file-row {
+          grid-template-columns: 46px minmax(0, 1fr);
+        }
+
+        .file-links {
+          grid-column: 1 / -1;
+          justify-content: flex-end;
+        }
+
+        .notification-panel {
+          right: auto;
+          left: 0;
         }
 
         .bar-row {
