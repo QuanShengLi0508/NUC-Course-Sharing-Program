@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const inlineScript = html.match(/<script>([\s\S]*)<\/script>/)?.[1] ?? "";
 
 const requiredSnippets = [
   "NUC Course Hub",
@@ -30,6 +31,14 @@ if (missing.length > 0) {
   for (const snippet of missing) {
     console.error(`- ${snippet}`);
   }
+  process.exit(1);
+}
+
+try {
+  new Function(inlineScript);
+} catch (error) {
+  console.error("Homepage verification failed. Inline script does not parse:");
+  console.error(error.message);
   process.exit(1);
 }
 

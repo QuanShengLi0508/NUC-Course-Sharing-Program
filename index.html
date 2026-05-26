@@ -1153,14 +1153,6 @@
       function renderResources(resources) {
         renderCourseIndex(resources);
       }
-            </div>
-            <div class="resource-actions">
-              <a class="action-link" href="${item.html_url}">View</a>
-              <a class="action-link" href="${item.download_url}">Download</a>
-            </div>
-          </article>
-        `).join("");
-      }
 
       function applyFilters() {
         const query = searchInput.value.trim().toLowerCase();
@@ -1203,8 +1195,6 @@
         setTerminal(resources, allBlobs.length - resources.length);
         renderCourseControls(resources);
         renderTypeControl(resources);
-        renderBars(resources);
-        renderSnapshots(resources);
         renderMetrics(resources);
         renderResources(resources);
         shell.classList.remove("loading");
