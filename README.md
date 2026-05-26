@@ -2,6 +2,11 @@
 
 NUC Course Sharing Program
 
+可视化课程目录：
+https://quanshengli0508.github.io/NUC-Course-Sharing-Program/
+
+页面源码为 GitHub Pages 静态站点，入口是 `index.html`，样式在 `css/styles.css`，交互逻辑在 `js/app.js`。
+
 ---
 
 ## 前言
@@ -163,5 +168,4 @@ GitHub 并非门槛最低的平台，
 也欢迎在你有能力的时候，留下些什么给后来者。
 
 **让信息不再只存在于运气之中。**
-
 
