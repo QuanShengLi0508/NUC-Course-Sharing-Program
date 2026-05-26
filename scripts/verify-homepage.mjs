@@ -9,10 +9,17 @@ const requiredSnippets = [
   "id=\"searchInput\"",
   "id=\"courseFilter\"",
   "id=\"typeFilter\"",
-  "id=\"resourceGrid\"",
+  "id=\"courseSlider\"",
+  "course-column",
+  "course-file-row",
+  "renderCourseIndex",
+  "groupResourcesByCourse",
+  "scroll-snap-type: x mandatory",
   "blockedPattern",
   "Crack",
   "Tanner Tools",
+  "modelsim",
+  "tanner",
   "download_url",
 ];
 
