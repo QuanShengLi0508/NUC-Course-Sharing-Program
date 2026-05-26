@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="中北大学课程资料共享计划可视化目录">
+    <title>NUC Course Hub</title>
+    <style>
+      :root {
+        --paper: #eee9dc;
+        --paper-strong: #f8f3e8;
+        --ink: #181713;
+        --muted: #706b62;
+        --soft: #d9d0c0;
+        --line: #1c1b18;
+        --terminal: #171612;
+        --green: #39984a;
+        --green-soft: #d6ead5;
+        --red: #ef5246;
+        --yellow: #f0b90b;
+        --blue: #315f91;
+        --shadow: 6px 6px 0 var(--line);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(rgba(24, 23, 19, .055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(24, 23, 19, .055) 1px, transparent 1px),
+          var(--paper);
+        background-size: 24px 24px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .site-shell {
+        min-height: 100vh;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 76px;
+        padding: 0 clamp(18px, 4vw, 56px);
+        border-bottom: 3px solid var(--line);
+        background: rgba(238, 233, 220, .92);
+        backdrop-filter: blur(10px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        border: 3px solid var(--line);
+        background:
+          linear-gradient(90deg, transparent 0 16%, var(--red) 16% 32%, transparent 32% 68%, var(--red) 68% 84%, transparent 84%),
+          linear-gradient(var(--paper-strong) 0 34%, #f5b397 34% 70%, transparent 70%);
+        box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .brand-mark::after {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--line);
+        box-shadow: 14px 0 0 var(--line), 7px 8px 0 var(--line);
+      }
+
+      .brand-title {
+        display: grid;
+        gap: 2px;
+        min-width: 0;
+      }
+
+      .brand-title strong {
+        font-size: clamp(18px, 2vw, 25px);
+        white-space: nowrap;
+      }
+
+      .brand-title span {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: .18em;
+        white-space: nowrap;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        flex-wrap: wrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: .14em;
+        font-size: 13px;
+      }
+
+      .nav a,
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 36px;
+        border: 2px solid var(--line);
+        background: rgba(248, 243, 232, .64);
+        padding: 7px 12px;
+        text-decoration: none;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--green);
+        display: inline-block;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+        gap: clamp(22px, 4vw, 46px);
+        align-items: end;
+        padding: clamp(34px, 7vw, 86px) clamp(18px, 5vw, 72px) 30px;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: clamp(46px, 9vw, 116px);
+        line-height: .9;
+      }
+
+      .hero-copy {
+        max-width: 740px;
+        margin: 22px 0 0;
+        color: #34312b;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.75;
+      }
+
+      .command-stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .terminal-card,
+      .control-panel,
+      .metric-card,
+      .course-rail,
+      .resource-card,
+      .snapshot-card,
+      .notice-panel {
+        border: 3px solid var(--line);
+        background: rgba(248, 243, 232, .78);
+        box-shadow: var(--shadow);
+      }
+
+      .terminal-card {
+        overflow: hidden;
+        background: var(--terminal);
+        color: #ece4d6;
+      }
+
+      .terminal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        min-height: 44px;
+        padding: 0 16px;
+        border-bottom: 2px solid #4a463d;
+        color: #9d978d;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+
+      .lights {
+        display: flex;
+        gap: 8px;
+      }
+
+      .lights span {
+        width: 13px;
+        height: 13px;
+        display: block;
+      }
+
+      .terminal-body {
+        min-height: 222px;
+        padding: 18px 20px 22px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .terminal-body p {
+        margin: 0;
+      }
+
+      .prompt {
+        color: #9ae27f;
+      }
+
+      .terminal-muted {
+        color: #a9a196;
+      }
+
+      .terminal-good {
+        color: #9ae27f;
+      }
+
+      .control-panel {
+        padding: 22px;
+        background: rgba(248, 243, 232, .86);
+      }
+
+      .panel-title {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: baseline;
+        margin-bottom: 18px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .panel-title h2,
+      .section-title h2 {
+        margin: 0;
+        font-size: clamp(23px, 3vw, 34px);
+      }
+
+      .panel-title span,
+      .section-title span {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+
+      .filters {
+        display: grid;
+        gap: 12px;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .field label {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .input-line {
+        width: 100%;
+        min-height: 52px;
+        border: 3px solid var(--line);
+        border-radius: 0;
+        background: #fffaf0;
+        color: var(--ink);
+        padding: 0 14px;
+        outline: 0;
+      }
+
+      .input-line:focus {
+        box-shadow: 4px 4px 0 var(--green);
+      }
+
+      .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        padding: 18px clamp(18px, 5vw, 72px) 20px;
+      }
+
+      .metric-card {
+        min-height: 126px;
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+        background: var(--paper-strong);
+      }
+
+      .metric-card strong {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1;
+      }
+
+      .metric-card span {
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+
+      .metric-card:nth-child(2) {
+        background: #e8f1df;
+      }
+
+      .metric-card:nth-child(3) {
+        background: #f6e6d5;
+      }
+
+      .metric-card:nth-child(4) {
+        background: #dce8ee;
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+        gap: clamp(18px, 3vw, 30px);
+        align-items: start;
+        padding: 28px clamp(18px, 5vw, 72px) 70px;
+      }
+
+      .course-rail {
+        position: sticky;
+        top: 96px;
+        padding: 18px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .course-list {
+        display: grid;
+        gap: 8px;
+        max-height: 54vh;
+        overflow: auto;
+        padding-right: 5px;
+      }
+
+      .course-button {
+        width: 100%;
+        min-height: 42px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
+        border: 2px solid var(--line);
+        background: #fffaf0;
+        color: var(--ink);
+        padding: 9px 10px;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .course-button:hover,
+      .course-button.is-active {
+        background: var(--green-soft);
+        box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .course-button span:first-child {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .course-count {
+        min-width: 28px;
+        text-align: right;
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .content-stack {
+        display: grid;
+        gap: 24px;
+      }
+
+      .viz-panel {
+        border-top: 3px solid var(--line);
+        border-bottom: 3px solid var(--line);
+        background:
+          linear-gradient(90deg, rgba(57, 152, 74, .18), transparent 32%),
+          linear-gradient(135deg, rgba(49, 95, 145, .14), transparent 42%),
+          rgba(248, 243, 232, .62);
+        padding: 20px 0;
+      }
+
+      .bar-list {
+        display: grid;
+        gap: 11px;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: minmax(120px, 220px) minmax(0, 1fr) 44px;
+        gap: 12px;
+        align-items: center;
+        font-size: 13px;
+      }
+
+      .bar-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 800;
+      }
+
+      .bar-track {
+        height: 18px;
+        border: 2px solid var(--line);
+        background: #fffaf0;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        width: var(--w, 0%);
+        background: repeating-linear-gradient(90deg, var(--green) 0 10px, #78bd68 10px 20px);
+      }
+
+      .bar-value {
+        color: var(--muted);
+        text-align: right;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .snapshot-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .snapshot-card {
+        min-height: 176px;
+        overflow: hidden;
+        background: var(--paper-strong);
+      }
+
+      .snapshot-card img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        display: block;
+        border-bottom: 3px solid var(--line);
+        background: var(--soft);
+      }
+
+      .snapshot-card p {
+        margin: 0;
+        padding: 10px 12px 12px;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #38342d;
+        word-break: break-word;
+      }
+
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .resource-card {
+        min-height: 152px;
+        display: grid;
+        gap: 14px;
+        align-content: space-between;
+        padding: 16px;
+        background: rgba(248, 243, 232, .9);
+      }
+
+      .resource-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .resource-type {
+        min-width: 54px;
+        height: 34px;
+        display: inline-grid;
+        place-items: center;
+        border: 2px solid var(--line);
+        background: var(--green-soft);
+        color: var(--ink);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .resource-size {
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .resource-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 17px;
+        line-height: 1.45;
+        word-break: break-word;
+      }
+
+      .resource-course {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+        word-break: break-word;
+      }
+
+      .resource-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .action-link {
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--line);
+        background: #fffaf0;
+        color: var(--ink);
+        padding: 7px 10px;
+        text-decoration: none;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .action-link:hover {
+        background: var(--yellow);
+        box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .notice-panel {
+        padding: 22px;
+        background: #fffaf0;
+      }
+
+      .notice-panel p {
+        margin: 0;
+        color: #38342d;
+        line-height: 1.75;
+      }
+
+      .empty-state {
+        display: none;
+      }
+
+      .loading .resource-grid,
+      .loading .snapshot-grid,
+      .loading .bar-list,
+      .loading .course-list {
+        opacity: .45;
+      }
+
+      .footer {
+        border-top: 3px solid var(--line);
+        padding: 24px clamp(18px, 5vw, 72px);
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        background: rgba(248, 243, 232, .72);
+      }
+
+      @media (max-width: 1100px) {
+        .hero,
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .course-rail {
+          position: static;
+        }
+
+        .metric-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding-top: 14px;
+          padding-bottom: 14px;
+        }
+
+        .brand-title strong,
+        .brand-title span {
+          white-space: normal;
+        }
+
+        .nav {
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        .hero {
+          padding-top: 30px;
+        }
+
+        .filter-grid,
+        .metric-grid,
+        .resource-grid,
+        .snapshot-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .bar-row {
+          grid-template-columns: minmax(0, 1fr) 44px;
+        }
+
+        .bar-track {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell loading">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="NUC Course Hub">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-title">
+            <strong>NUC Course Hub</strong>
+            <span>Course Sharing Program</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Live</span>
+          <a href="https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program">GitHub</a>
+          <a href="#resources">Files</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">[ 01 · COURSE ARCHIVE ]</p>
+            <h1>Course<br>Archive<br>课程资料</h1>
+            <p class="hero-copy">
+              中北大学课程攻略共享计划的可视化入口。资料来自 GitHub 仓库公开目录，按课程、类型和关键词快速定位。
+            </p>
+          </div>
+          <div class="command-stack">
+            <section class="terminal-card" aria-label="Repository status">
+              <div class="terminal-header">
+                <div class="lights" aria-hidden="true">
+                  <span style="background: var(--red)"></span>
+                  <span style="background: var(--yellow)"></span>
+                  <span style="background: var(--green)"></span>
+                </div>
+                <span>GitHub Pages · Secure Index</span>
+              </div>
+              <div class="terminal-body" id="terminalLog" aria-live="polite">
+                <p><span class="prompt">$</span> curl repo-tree --recursive</p>
+                <p class="terminal-muted">loading public course index...</p>
+              </div>
+            </section>
+
+            <section class="control-panel" aria-label="Filters">
+              <div class="panel-title">
+                <h2>Sign In 搜索</h2>
+                <span>Find</span>
+              </div>
+              <div class="filters">
+                <div class="field">
+                  <label for="searchInput">关键词</label>
+                  <input class="input-line" id="searchInput" type="search" placeholder="课程名 / 文件名 / pdf / 试卷">
+                </div>
+                <div class="filter-grid">
+                  <div class="field">
+                    <label for="courseFilter">课程</label>
+                    <select class="input-line" id="courseFilter">
+                      <option value="">全部课程</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="typeFilter">类型</label>
+                    <select class="input-line" id="typeFilter">
+                      <option value="">全部类型</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Repository metrics">
+          <div class="metric-card">
+            <strong id="fileMetric">0</strong>
+            <span>Public Files</span>
+          </div>
+          <div class="metric-card">
+            <strong id="courseMetric">0</strong>
+            <span>Courses</span>
+          </div>
+          <div class="metric-card">
+            <strong id="typeMetric">0</strong>
+            <span>Types</span>
+          </div>
+          <div class="metric-card">
+            <strong id="shownMetric">0</strong>
+            <span>Shown</span>
+          </div>
+        </section>
+
+        <section class="main-grid" id="resources">
+          <aside class="course-rail">
+            <div class="section-title">
+              <h2>Courses</h2>
+              <span id="courseListCount">0</span>
+            </div>
+            <div class="course-list" id="courseList"></div>
+          </aside>
+
+          <div class="content-stack">
+            <section class="viz-panel" aria-label="Course distribution">
+              <div class="section-title">
+                <h2>Course Signal</h2>
+                <span>Top 8</span>
+              </div>
+              <div class="bar-list" id="barList"></div>
+            </section>
+
+            <section>
+              <div class="section-title">
+                <h2>Visual Notes</h2>
+                <span>Images</span>
+              </div>
+              <div class="snapshot-grid" id="snapshotGrid"></div>
+            </section>
+
+            <section>
+              <div class="section-title">
+                <h2>Resource TTY</h2>
+                <span id="resourceCount">0 files</span>
+              </div>
+              <div class="resource-grid" id="resourceGrid"></div>
+              <div class="notice-panel empty-state" id="emptyState">
+                <p>没有匹配的资料。</p>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · CC BY-NC-SA for original notes
+      </footer>
+    </div>
+
+    <script>
+      const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing-Program/git/trees/main?recursive=1";
+      const repoBlobBase = "https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program/blob/main/";
+      const rawBase = "https://raw.githubusercontent.com/QuanShengLi0508/NUC-Course-Sharing-Program/main/";
+      const blockedPattern = /Crack|Tanner Tools|破解器|破解|patched|keygen|MentorKG|绝密|\.exe$|\.cab$|\.rar$|\.rar\.[0-9]+$|\.zip$|\.7z$|\.dmg$/i;
+      const hiddenPattern = /^(\.|scripts\/|docs\/|index\.html$|README\.md$)/i;
+
+      const typeLabels = new Map([
+        ["pdf", "PDF"],
+        ["doc", "DOC"],
+        ["docx", "DOC"],
+        ["ppt", "PPT"],
+        ["pptx", "PPT"],
+        ["jpg", "IMG"],
+        ["jpeg", "IMG"],
+        ["png", "IMG"],
+        ["gif", "IMG"],
+        ["webp", "IMG"],
+        ["mp4", "MP4"],
+        ["asm", "CODE"],
+        ["ms14", "DATA"],
+        ["obj", "DATA"],
+        ["mph", "DATA"],
+        ["txt", "TXT"],
+      ]);
+
+      const state = {
+        allResources: [],
+        filteredResources: [],
+        selectedCourse: "",
+      };
+
+      const shell = document.querySelector(".site-shell");
+      const searchInput = document.querySelector("#searchInput");
+      const courseFilter = document.querySelector("#courseFilter");
+      const typeFilter = document.querySelector("#typeFilter");
+      const courseList = document.querySelector("#courseList");
+      const resourceGrid = document.querySelector("#resourceGrid");
+      const snapshotGrid = document.querySelector("#snapshotGrid");
+      const barList = document.querySelector("#barList");
+      const emptyState = document.querySelector("#emptyState");
+      const terminalLog = document.querySelector("#terminalLog");
+
+      function encodePath(path) {
+        return path.split("/").map(encodeURIComponent).join("/");
+      }
+
+      function getExt(path) {
+        const clean = path.split("?")[0];
+        const file = clean.slice(clean.lastIndexOf("/") + 1);
+        const dot = file.lastIndexOf(".");
+        return dot === -1 ? "" : file.slice(dot + 1).toLowerCase();
+      }
+
+      function getType(path) {
+        return typeLabels.get(getExt(path)) || "FILE";
+      }
+
+      function formatSize(size) {
+        if (!Number.isFinite(size) || size <= 0) return "";
+        if (size < 1024) return `${size} B`;
+        if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+        if (size < 1024 * 1024 * 1024) return `${(size / 1024 / 1024).toFixed(1)} MB`;
+        return `${(size / 1024 / 1024 / 1024).toFixed(1)} GB`;
+      }
+
+      function normalizeTreeItem(item) {
+        const path = item.path;
+        const course = path.includes("/") ? path.split("/")[0] : "根目录";
+        const name = path.slice(path.lastIndexOf("/") + 1);
+        const encoded = encodePath(path);
+        return {
+          path,
+          name,
+          course,
+          size: item.size || 0,
+          type: getType(path),
+          ext: getExt(path),
+          html_url: `${repoBlobBase}${encoded}`,
+          download_url: `${rawBase}${encoded}`,
+        };
+      }
+
+      function isPublicCourseFile(item) {
+        if (item.type !== "blob") return false;
+        if (!item.path.includes("/")) return false;
+        if (hiddenPattern.test(item.path)) return false;
+        if (blockedPattern.test(item.path)) return false;
+        return true;
+      }
+
+      function countBy(items, key) {
+        const counts = new Map();
+        for (const item of items) {
+          const value = item[key];
+          counts.set(value, (counts.get(value) || 0) + 1);
+        }
+        return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-Hans-CN"));
+      }
+
+      function setTerminal(resources, blockedCount) {
+        const courses = new Set(resources.map((item) => item.course)).size;
+        const types = new Set(resources.map((item) => item.type)).size;
+        terminalLog.innerHTML = `
+          <p><span class="prompt">$</span> curl repo-tree --recursive</p>
+          <p><span class="terminal-good">${resources.length}</span> public files indexed · <span class="terminal-good">${courses}</span> courses · <span class="terminal-good">${types}</span> types</p>
+          <p><span class="prompt">$</span> apply safe-index-filter</p>
+          <p class="terminal-muted">${blockedCount} package / installer / crack-like paths hidden from this page</p>
+          <p><span class="terminal-good">ready</span> · GitHub Pages · static · download_url linked</p>
+        `;
+      }
+
+      function renderMetrics(resources) {
+        document.querySelector("#fileMetric").textContent = resources.length;
+        document.querySelector("#courseMetric").textContent = new Set(resources.map((item) => item.course)).size;
+        document.querySelector("#typeMetric").textContent = new Set(resources.map((item) => item.type)).size;
+        document.querySelector("#shownMetric").textContent = state.filteredResources.length;
+      }
+
+      function renderCourseControls(resources) {
+        const courses = countBy(resources, "course");
+        document.querySelector("#courseListCount").textContent = courses.length;
+
+        courseFilter.innerHTML = `<option value="">全部课程</option>` + courses
+          .map(([course, count]) => `<option value="${escapeHtml(course)}">${escapeHtml(course)} (${count})</option>`)
+          .join("");
+
+        courseList.innerHTML = [
+          `<button class="course-button${state.selectedCourse === "" ? " is-active" : ""}" type="button" data-course="">
+            <span>全部课程</span><span class="course-count">${resources.length}</span>
+          </button>`,
+          ...courses.map(([course, count]) => `
+            <button class="course-button${state.selectedCourse === course ? " is-active" : ""}" type="button" data-course="${escapeHtml(course)}">
+              <span>${escapeHtml(course)}</span><span class="course-count">${count}</span>
+            </button>
+          `),
+        ].join("");
+
+        for (const button of courseList.querySelectorAll("button")) {
+          button.addEventListener("click", () => {
+            state.selectedCourse = button.dataset.course || "";
+            courseFilter.value = state.selectedCourse;
+            applyFilters();
+          });
+        }
+      }
+
+      function renderTypeControl(resources) {
+        const types = countBy(resources, "type");
+        typeFilter.innerHTML = `<option value="">全部类型</option>` + types
+          .map(([type, count]) => `<option value="${escapeHtml(type)}">${escapeHtml(type)} (${count})</option>`)
+          .join("");
+      }
+
+      function renderBars(resources) {
+        const top = countBy(resources, "course").slice(0, 8);
+        const max = Math.max(1, ...top.map(([, count]) => count));
+        barList.innerHTML = top.map(([course, count]) => `
+          <div class="bar-row">
+            <div class="bar-label" title="${escapeHtml(course)}">${escapeHtml(course)}</div>
+            <div class="bar-track" aria-hidden="true"><div class="bar-fill" style="--w:${Math.round(count / max * 100)}%"></div></div>
+            <div class="bar-value">${count}</div>
+          </div>
+        `).join("");
+      }
+
+      function renderSnapshots(resources) {
+        const images = resources.filter((item) => item.type === "IMG").slice(0, 3);
+        snapshotGrid.innerHTML = images.map((item) => `
+          <article class="snapshot-card">
+            <img src="${item.download_url}" alt="${escapeHtml(item.name)}" loading="lazy">
+            <p>${escapeHtml(item.course)} / ${escapeHtml(item.name)}</p>
+          </article>
+        `).join("");
+      }
+
+      function renderResources(resources) {
+        document.querySelector("#resourceCount").textContent = `${resources.length} files`;
+        emptyState.style.display = resources.length === 0 ? "block" : "none";
+        resourceGrid.innerHTML = resources.slice(0, 80).map((item) => `
+          <article class="resource-card">
+            <div>
+              <div class="resource-head">
+                <span class="resource-type">${escapeHtml(item.type)}</span>
+                <span class="resource-size">${escapeHtml(formatSize(item.size))}</span>
+              </div>
+              <h3 class="resource-title">${escapeHtml(item.name)}</h3>
+              <p class="resource-course">${escapeHtml(item.course)}</p>
+            </div>
+            <div class="resource-actions">
+              <a class="action-link" href="${item.html_url}">View</a>
+              <a class="action-link" href="${item.download_url}">Download</a>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.trim().toLowerCase();
+        const course = courseFilter.value;
+        const type = typeFilter.value;
+        state.selectedCourse = course;
+        state.filteredResources = state.allResources.filter((item) => {
+          const haystack = `${item.course} ${item.name} ${item.path} ${item.type}`.toLowerCase();
+          return (!query || haystack.includes(query)) && (!course || item.course === course) && (!type || item.type === type);
+        });
+        renderMetrics(state.allResources);
+        renderCourseControls(state.allResources);
+        renderResources(state.filteredResources);
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      async function boot() {
+        const response = await fetch(repoApi, { headers: { Accept: "application/vnd.github+json" } });
+        if (!response.ok) {
+          throw new Error(`GitHub API ${response.status}`);
+        }
+
+        const payload = await response.json();
+        const allBlobs = payload.tree.filter((item) => item.type === "blob" && item.path.includes("/"));
+        const resources = payload.tree
+          .filter(isPublicCourseFile)
+          .map(normalizeTreeItem)
+          .sort((a, b) => a.course.localeCompare(b.course, "zh-Hans-CN") || a.name.localeCompare(b.name, "zh-Hans-CN"));
+
+        state.allResources = resources;
+        state.filteredResources = resources;
+        setTerminal(resources, allBlobs.length - resources.length);
+        renderCourseControls(resources);
+        renderTypeControl(resources);
+        renderBars(resources);
+        renderSnapshots(resources);
+        renderMetrics(resources);
+        renderResources(resources);
+        shell.classList.remove("loading");
+      }
+
+      searchInput.addEventListener("input", applyFilters);
+      courseFilter.addEventListener("change", applyFilters);
+      typeFilter.addEventListener("change", applyFilters);
+
+      boot().catch((error) => {
+        console.error(error);
+        terminalLog.innerHTML = `
+          <p><span class="prompt">$</span> curl repo-tree --recursive</p>
+          <p class="terminal-muted">GitHub API temporarily unavailable.</p>
+          <p class="terminal-muted">Open the repository link above.</p>
+        `;
+        shell.classList.remove("loading");
+      });
+    </script>
+  </body>
+</html>
