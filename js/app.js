@@ -1,8 +1,9 @@
 const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing-Program/git/trees/main?recursive=1";
+      const localIndexUrl = "./data/resource-index.json";
       const repoBlobBase = "https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program/blob/main/";
       const rawBase = "https://raw.githubusercontent.com/QuanShengLi0508/NUC-Course-Sharing-Program/main/";
       const blockedPattern = /Crack|Tanner Tools|modelsim|tanner|mentor|破解器|破解|patched|keygen|MentorKG|绝密|软件|安装包|驱动|\.exe$|\.cab$|\.msi$|\.dll$|\.iso$|\.rar$|\.rar\.[0-9]+$|\.zip$|\.7z$|\.dmg$/i;
-      const hiddenPattern = /^(\.|scripts\/|docs\/|css\/|js\/|index\.html$|README\.md$)/i;
+      const hiddenPattern = /^(\.|scripts\/|docs\/|css\/|js\/|data\/|index\.html$|README\.md$)/i;
 
       const typeLabels = new Map([
         ["pdf", "PDF"],
@@ -94,7 +95,7 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
         return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "zh-Hans-CN"));
       }
 
-      function setTerminal(resources, blockedCount) {
+      function setTerminal(resources, blockedCount, sourceLabel) {
         const courses = new Set(resources.map((item) => item.course)).size;
         const types = new Set(resources.map((item) => item.type)).size;
         terminalLog.innerHTML = `
@@ -102,7 +103,7 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
           <p><span class="terminal-good">${resources.length}</span> public files indexed · <span class="terminal-good">${courses}</span> courses · <span class="terminal-good">${types}</span> types</p>
           <p><span class="prompt">$</span> apply safe-index-filter</p>
           <p class="terminal-muted">${blockedCount} package / installer / crack-like paths hidden from this page</p>
-          <p><span class="terminal-good">ready</span> · GitHub Pages · static · download_url linked</p>
+          <p><span class="terminal-good">ready</span> · ${escapeHtml(sourceLabel)} · static · download_url linked</p>
         `;
       }
 
@@ -115,17 +116,22 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
 
       function renderCourseControls(resources) {
         const courses = countBy(resources, "course");
+        const selectedCourse = courseFilter.value;
 
         courseFilter.innerHTML = `<option value="">全部课程</option>` + courses
           .map(([course, count]) => `<option value="${escapeHtml(course)}">${escapeHtml(course)} (${count})</option>`)
           .join("");
+        courseFilter.value = selectedCourse;
       }
 
       function renderTypeControl(resources) {
         const types = countBy(resources, "type");
+        const selectedType = typeFilter.value;
+
         typeFilter.innerHTML = `<option value="">全部类型</option>` + types
           .map(([type, count]) => `<option value="${escapeHtml(type)}">${escapeHtml(type)} (${count})</option>`)
           .join("");
+        typeFilter.value = selectedType;
       }
 
       function groupResourcesByCourse(resources) {
@@ -173,8 +179,8 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
                       <div class="file-meta">${escapeHtml(formatSize(item.size) || item.ext || "file")}</div>
                     </div>
                     <div class="file-links">
-                      <a class="action-link" href="${item.html_url}">View</a>
-                      <a class="action-link" href="${item.download_url}">Down</a>
+                      <a class="action-link" href="${item.html_url}">查看</a>
+                      <a class="action-link" href="${item.download_url}">下载</a>
                     </div>
                   </div>
                 `).join("")}
@@ -215,22 +221,41 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
           .replaceAll("'", "&#39;");
       }
 
-      async function boot() {
-        const response = await fetch(repoApi, { headers: { Accept: "application/vnd.github+json" } });
+      async function fetchJson(url, options) {
+        const response = await fetch(url, options);
         if (!response.ok) {
-          throw new Error(`GitHub API ${response.status}`);
+          throw new Error(`${url} ${response.status}`);
         }
+        return response.json();
+      }
 
-        const payload = await response.json();
+      async function loadTreePayload() {
+        try {
+          return {
+            payload: await fetchJson(repoApi, { headers: { Accept: "application/vnd.github+json" } }),
+            sourceLabel: "GitHub API",
+          };
+        } catch (apiError) {
+          console.warn("GitHub API unavailable, falling back to local index.", apiError);
+          return {
+            payload: await fetchJson(localIndexUrl),
+            sourceLabel: "local resource-index.json",
+          };
+        }
+      }
+
+      async function boot() {
+        const { payload, sourceLabel } = await loadTreePayload();
         const allBlobs = payload.tree.filter((item) => item.type === "blob" && item.path.includes("/"));
         const resources = payload.tree
           .filter(isPublicCourseFile)
           .map(normalizeTreeItem)
           .sort((a, b) => a.course.localeCompare(b.course, "zh-Hans-CN") || a.name.localeCompare(b.name, "zh-Hans-CN"));
+        const blockedCount = Number.isFinite(payload.blockedCount) ? payload.blockedCount : allBlobs.length - resources.length;
 
         state.allResources = resources;
         state.filteredResources = resources;
-        setTerminal(resources, allBlobs.length - resources.length);
+        setTerminal(resources, blockedCount, sourceLabel);
         renderCourseControls(resources);
         renderTypeControl(resources);
         renderMetrics(resources);

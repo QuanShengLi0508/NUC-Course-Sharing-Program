@@ -11,37 +11,56 @@
     <div class="site-shell loading">
       <header class="topbar">
         <a class="brand" href="./" aria-label="NUC Course Hub">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-mark" aria-hidden="true">NUC</span>
           <span class="brand-title">
             <strong>NUC Course Hub</strong>
-            <span>Course Sharing Program</span>
+            <span>中北大学课程资料</span>
           </span>
         </a>
         <nav class="nav" aria-label="Primary">
-          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Live</span>
-          <a href="https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program">GitHub</a>
+          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Live Index</span>
           <a href="#resources">Files</a>
+          <a href="https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program">GitHub</a>
         </nav>
       </header>
 
       <main>
         <section class="hero">
-          <div>
-            <p class="eyebrow">[ 01 · COURSE ARCHIVE ]</p>
-            <h1>Course<br>Archive<br>课程资料</h1>
+          <div class="hero-copy-block">
+            <p class="eyebrow">[ 01 / PUBLIC COURSE ARCHIVE ]</p>
+            <h1>中北大学课程资料</h1>
             <p class="hero-copy">
-              中北大学课程攻略共享计划的可视化入口。资料来自 GitHub 仓库公开目录，按课程、类型和关键词快速定位。
+              集成电路、大学物理、高等数学、线性代数等课程资料的公开索引。页面直接读取 GitHub 仓库目录，适合快速检索课件、试卷、报告和复习材料。
             </p>
+            <div class="quick-stats" aria-label="Quick stats">
+              <div>
+                <strong id="fileMetric">0</strong>
+                <span>Public Files</span>
+              </div>
+              <div>
+                <strong id="courseMetric">0</strong>
+                <span>Courses</span>
+              </div>
+              <div>
+                <strong id="typeMetric">0</strong>
+                <span>Types</span>
+              </div>
+              <div>
+                <strong id="shownMetric">0</strong>
+                <span>Shown</span>
+              </div>
+            </div>
           </div>
-          <div class="command-stack">
+
+          <div class="console-stack">
             <section class="terminal-card" aria-label="Repository status">
               <div class="terminal-header">
                 <div class="lights" aria-hidden="true">
-                  <span style="background: var(--red)"></span>
-                  <span style="background: var(--yellow)"></span>
-                  <span style="background: var(--green)"></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
                 </div>
-                <span>GitHub Pages · Secure Index</span>
+                <span>GitHub Pages / Secure Index</span>
               </div>
               <div class="terminal-body" id="terminalLog" aria-live="polite">
                 <p><span class="prompt">$</span> curl repo-tree --recursive</p>
@@ -51,7 +70,7 @@
 
             <section class="control-panel" aria-label="Filters">
               <div class="panel-title">
-                <h2>Sign In 搜索</h2>
+                <h2>检索资料</h2>
                 <span>Find</span>
               </div>
               <div class="filters">
@@ -78,48 +97,29 @@
           </div>
         </section>
 
-        <section class="metric-grid" aria-label="Repository metrics">
-          <div class="metric-card">
-            <strong id="fileMetric">0</strong>
-            <span>Public Files</span>
-          </div>
-          <div class="metric-card">
-            <strong id="courseMetric">0</strong>
-            <span>Courses</span>
-          </div>
-          <div class="metric-card">
-            <strong id="typeMetric">0</strong>
-            <span>Types</span>
-          </div>
-          <div class="metric-card">
-            <strong id="shownMetric">0</strong>
-            <span>Shown</span>
-          </div>
-        </section>
-
         <section class="directory-stage" id="resources">
-          <div class="directory-shell">
-            <div class="section-title">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">[ 02 / DIRECTORY ]</p>
               <h2>Course Index 课程目录</h2>
-              <span id="resourceCount">0 files</span>
             </div>
-            <div class="directory-toolbar">
-              <span>Swipe / Shift + Wheel · 每个课程一栏</span>
+            <div class="directory-counts">
+              <span id="resourceCount">0 files</span>
               <span id="courseListCount">0 courses</span>
             </div>
-            <div class="course-slider" id="courseSlider" aria-label="Sliding course directory"></div>
-            <div class="notice-panel empty-state" id="emptyState">
-              <p>没有匹配的资料。</p>
-            </div>
+          </div>
+          <div class="course-slider" id="courseSlider" aria-label="Course directory"></div>
+          <div class="notice-panel empty-state" id="emptyState">
+            <p>没有匹配的资料。</p>
           </div>
         </section>
       </main>
 
       <footer class="footer">
-        GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · CC BY-NC-SA for original notes
+        GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · Public course archive
       </footer>
     </div>
 
-    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/app.js?v=20260526"></script>
   </body>
 </html>
