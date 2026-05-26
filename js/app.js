@@ -191,11 +191,30 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
         const courses = new Set(resources.map((item) => item.course)).size;
         const types = new Set(resources.map((item) => item.type)).size;
         terminalLog.innerHTML = `
-          <p><span class="prompt">$</span> curl repo-tree --recursive</p>
-          <p><span class="terminal-good">${resources.length}</span> public files indexed · <span class="terminal-good">${courses}</span> courses · <span class="terminal-good">${types}</span> types</p>
-          <p><span class="prompt">$</span> apply safe-index-filter</p>
-          <p class="terminal-muted">${blockedCount} package / installer / crack-like paths hidden from this page</p>
-          <p><span class="terminal-good">ready</span> · ${escapeHtml(sourceLabel)} · GitHub LFS raw · package folders collapsed</p>
+          <p class="readme-kicker">README.md</p>
+          <h2>中北大学课程攻略共享计划</h2>
+          <p>这里整理中北大学课程资料、复习经验、历年试卷、学习建议和补充材料。资料按最初的课程目录层级展示，方便后来的同学顺着文件夹找到真正需要的内容。</p>
+          <div class="readme-stats" aria-label="Repository summary">
+            <span>${resources.length} files</span>
+            <span>${courses} courses</span>
+            <span>${types} types</span>
+            <span>${blockedCount} unsafe paths hidden</span>
+          </div>
+          <h3>为什么要做这件事</h3>
+          <p>大学课程资料常常散落在群聊、网盘、论坛和个人电脑里。很多真正有用的信息并不是不存在，而是难以系统获取，只能靠运气和口口相传。</p>
+          <p>这个项目希望把零散、隐晦、依赖个人保存的资料与经验，逐步转化为公开、可查阅、可积累、可持续完善的共享资源。</p>
+          <h3>内容范围</h3>
+          <ul>
+            <li>选课与学习建议</li>
+            <li>电子教材、参考书与补充材料</li>
+            <li>平时作业参考、复习资料和历年试卷</li>
+            <li>课程实验、项目文件和经验总结</li>
+          </ul>
+          <h3>贡献方式</h3>
+          <p>欢迎通过贡献入口、评论区或 GitHub Issue 补充资料。如果不方便操作 Git，也可以把资料链接或附件说明提交出来，由维护者协助整理到对应课程目录。</p>
+          <h3>注意事项</h3>
+          <p>请勿上传当期考试原题、破解版软件、商业安装包或明确限制传播的课程平台内容。页面会隐藏安装包、破解、驱动等风险路径，优先保留可学习和可复用的课程资料。</p>
+          <p class="terminal-muted">欢迎通过贡献入口、评论区或 GitHub Issue 补充资料。${escapeHtml(sourceLabel)} · GitHub LFS raw · folder tree view</p>
         `;
       }
 
@@ -633,9 +652,12 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
       boot().catch((error) => {
         console.error(error);
         terminalLog.innerHTML = `
-          <p><span class="prompt">$</span> curl repo-tree --recursive</p>
+          <p class="readme-kicker">README.md</p>
+          <h2>中北大学课程攻略共享计划</h2>
+          <p>这里整理中北大学课程资料、复习经验、历年试卷、学习建议和补充材料。当前目录索引暂时加载失败，可以先打开 GitHub 仓库查看原始文件夹。</p>
+          <h3>项目初衷</h3>
+          <p>让已经被整理出来的课程资料和学习经验，不再只存在于运气之中。</p>
           <p class="terminal-muted">GitHub API temporarily unavailable.</p>
-          <p class="terminal-muted">Open the repository link above.</p>
         `;
         shell.classList.remove("loading");
       });

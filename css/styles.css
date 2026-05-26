@@ -350,15 +350,82 @@
       }
 
       .terminal-body {
-        min-height: 222px;
+        height: min(430px, 48vh);
         padding: 18px 20px 22px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-color: var(--yellow) #2a2823;
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
         font-size: 14px;
-        line-height: 1.85;
+        line-height: 1.75;
       }
 
       .terminal-body p {
-        margin: 0;
+        margin: 0 0 12px;
+      }
+
+      .terminal-body h2,
+      .terminal-body h3 {
+        margin: 0 0 10px;
+        color: #fff7e8;
+        letter-spacing: 0;
+      }
+
+      .terminal-body h2 {
+        font-size: clamp(19px, 2.4vw, 28px);
+        line-height: 1.25;
+      }
+
+      .terminal-body h3 {
+        margin-top: 18px;
+        color: #f0b90b;
+        font-size: 15px;
+      }
+
+      .terminal-body ul {
+        margin: 0 0 12px;
+        padding-left: 20px;
+        color: #ece4d6;
+      }
+
+      .terminal-body li {
+        margin: 4px 0;
+      }
+
+      .terminal-body::-webkit-scrollbar {
+        width: 14px;
+      }
+
+      .terminal-body::-webkit-scrollbar-track {
+        border-left: 2px solid #4a463d;
+        background: #2a2823;
+      }
+
+      .terminal-body::-webkit-scrollbar-thumb {
+        border: 2px solid #2a2823;
+        background: var(--yellow);
+      }
+
+      .readme-kicker {
+        color: #9ae27f;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+
+      .readme-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0 16px;
+      }
+
+      .readme-stats span {
+        border: 2px solid #4a463d;
+        background: #24231f;
+        color: #9ae27f;
+        padding: 4px 7px;
+        font-size: 12px;
+        line-height: 1.2;
       }
 
       .prompt {
