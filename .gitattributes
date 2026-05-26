@@ -9,3 +9,4 @@
 *.msi filter=lfs diff=lfs merge=lfs -text
 *.dll filter=lfs diff=lfs merge=lfs -text
 *.iso filter=lfs diff=lfs merge=lfs -text
+*.tsdat filter=lfs diff=lfs merge=lfs -text
