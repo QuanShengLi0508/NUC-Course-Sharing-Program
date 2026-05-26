@@ -240,6 +240,12 @@
         padding: clamp(34px, 7vw, 86px) clamp(18px, 5vw, 72px) 30px;
       }
 
+      .hero-lead {
+        min-width: 0;
+        display: grid;
+        align-content: start;
+      }
+
       .eyebrow {
         margin: 0 0 18px;
         color: var(--muted);
@@ -444,6 +450,11 @@
       .control-panel {
         padding: 22px;
         background: rgba(248, 243, 232, .86);
+      }
+
+      .hero-lead .control-panel {
+        width: min(100%, 760px);
+        margin-top: clamp(76px, 12vw, 160px);
       }
 
       .panel-title {
@@ -1163,6 +1174,10 @@
         .hero,
         .main-grid {
           grid-template-columns: 1fr;
+        }
+
+        .hero-lead .control-panel {
+          margin-top: 26px;
         }
 
         .course-rail {

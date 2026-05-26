@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="中北大学课程资料共享计划可视化目录">
     <title>NUC Course Hub</title>
-    <link rel="stylesheet" href="./css/styles.css?v=20260527-hero-align">
+    <link rel="stylesheet" href="./css/styles.css?v=20260527-search-left">
   </head>
   <body>
     <div class="site-shell loading">
@@ -48,27 +48,9 @@
 
       <main>
         <section class="hero">
-          <div>
+          <div class="hero-lead">
             <p class="eyebrow">[ 01 · COURSE ARCHIVE ]</p>
             <h1 class="hero-title" aria-label="NUC-Course-Sharing-Program">NUC-Course-<br>Sharing-Program</h1>
-          </div>
-          <div class="command-stack">
-            <section class="terminal-card" aria-label="Repository status">
-              <div class="terminal-header">
-                <div class="lights" aria-hidden="true">
-                  <span style="background: var(--red)"></span>
-                  <span style="background: var(--yellow)"></span>
-                  <span style="background: var(--green)"></span>
-                </div>
-                <span>README · Project Intro</span>
-              </div>
-              <div class="terminal-body" id="terminalLog" aria-live="polite">
-                <p class="readme-kicker">README.md</p>
-                <h2>中北大学课程攻略共享计划</h2>
-                <p class="terminal-muted">正在载入课程目录与项目介绍...</p>
-              </div>
-            </section>
-
             <section class="control-panel" aria-label="Filters">
               <div class="panel-title">
                 <h2>搜索</h2>
@@ -93,6 +75,23 @@
                     </select>
                   </div>
                 </div>
+              </div>
+            </section>
+          </div>
+          <div class="command-stack">
+            <section class="terminal-card" aria-label="Repository status">
+              <div class="terminal-header">
+                <div class="lights" aria-hidden="true">
+                  <span style="background: var(--red)"></span>
+                  <span style="background: var(--yellow)"></span>
+                  <span style="background: var(--green)"></span>
+                </div>
+                <span>README · Project Intro</span>
+              </div>
+              <div class="terminal-body" id="terminalLog" aria-live="polite">
+                <p class="readme-kicker">README.md</p>
+                <h2>中北大学课程攻略共享计划</h2>
+                <p class="terminal-muted">正在载入课程目录与项目介绍...</p>
               </div>
             </section>
           </div>
@@ -209,6 +208,6 @@
       </footer>
     </div>
 
-    <script type="module" src="./js/app.js?v=20260527-hero-align"></script>
+    <script type="module" src="./js/app.js?v=20260527-search-left"></script>
   </body>
 </html>
