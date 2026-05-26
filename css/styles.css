@@ -236,7 +236,7 @@
         display: grid;
         grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
         gap: clamp(22px, 4vw, 46px);
-        align-items: end;
+        align-items: start;
         padding: clamp(34px, 7vw, 86px) clamp(18px, 5vw, 72px) 30px;
       }
 
@@ -252,12 +252,13 @@
       h1,
       .hero-title {
         margin: -12px 0 0;
+        color: #706b62;
         font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
         font-size: clamp(32px, 5.6vw, 76px);
         line-height: .92;
         font-weight: 900;
         text-transform: uppercase;
-        text-shadow: 2px 0 0 var(--ink), 0 2px 0 var(--ink);
+        text-shadow: 2px 0 0 #9a9386, 0 2px 0 #9a9386;
         max-width: 980px;
       }
 
