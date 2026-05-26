@@ -630,17 +630,29 @@
       .course-file-row {
         display: grid;
         grid-template-columns: 54px minmax(0, 1fr) auto;
-        align-items: center;
+        align-items: start;
         gap: 10px;
         min-height: 54px;
         border: 2px solid rgba(28, 27, 24, .72);
         background: rgba(255, 250, 240, .9);
-        padding: 8px;
+        padding: 8px 8px 8px calc(8px + var(--depth, 0) * 18px);
       }
 
       .course-file-row:hover {
         background: var(--green-soft);
         box-shadow: 3px 3px 0 var(--line);
+      }
+
+      .directory-row {
+        background: rgba(214, 234, 213, .82);
+      }
+
+      .directory-row .file-kind {
+        background: var(--yellow);
+      }
+
+      .directory-row .file-name {
+        font-weight: 900;
       }
 
       .file-kind {
@@ -656,12 +668,16 @@
 
       .file-main {
         min-width: 0;
+        padding-top: 2px;
       }
 
       .file-name {
         color: var(--ink);
         font-size: 14px;
         line-height: 1.35;
+        overflow: visible;
+        overflow-wrap: anywhere;
+        white-space: normal;
         word-break: break-word;
       }
 
@@ -670,12 +686,17 @@
         color: var(--muted);
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
         font-size: 11px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+        white-space: normal;
       }
 
       .file-links {
         display: flex;
+        flex-wrap: wrap;
         gap: 6px;
         align-items: center;
+        justify-content: flex-end;
       }
 
       .main-grid {

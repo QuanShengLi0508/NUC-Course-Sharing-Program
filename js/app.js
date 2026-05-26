@@ -89,11 +89,15 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
         const path = item.path;
         const course = path.includes("/") ? path.split("/")[0] : "根目录";
         const name = path.slice(path.lastIndexOf("/") + 1);
+        const relativePath = path.includes("/") ? path.split("/").slice(1).join("/") : path;
+        const parentPath = relativePath.includes("/") ? relativePath.split("/").slice(0, -1).join("/") : "课程根目录";
         const encoded = encodePath(path);
         const isPackage = item.type === "package";
         return {
           path,
           name,
+          relativePath,
+          parentPath,
           course,
           size: item.size || 0,
           type: isPackage ? "PACK" : getDisplayType(item),
@@ -233,9 +237,126 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
         return [...groups.entries()]
           .map(([course, files]) => ({
             course,
-            files: files.sort((a, b) => a.name.localeCompare(b.name, "zh-Hans-CN")),
+            files: files.sort((a, b) => a.path.localeCompare(b.path, "zh-Hans-CN")),
           }))
           .sort((a, b) => b.files.length - a.files.length || a.course.localeCompare(b.course, "zh-Hans-CN"));
+      }
+
+      function createDirectoryNode(name, path) {
+        return {
+          kind: "directory",
+          name,
+          path,
+          children: new Map(),
+          fileCount: 0,
+          size: 0,
+        };
+      }
+
+      function buildCourseTree(course, files) {
+        const root = createDirectoryNode(course, course);
+
+        for (const item of files) {
+          const segments = item.relativePath.split("/").filter(Boolean);
+          let current = root;
+
+          for (let index = 0; index < segments.length - 1; index += 1) {
+            const segment = segments[index];
+            const path = `${course}/${segments.slice(0, index + 1).join("/")}`;
+            if (!current.children.has(segment)) {
+              current.children.set(segment, createDirectoryNode(segment, path));
+            }
+            current = current.children.get(segment);
+          }
+
+          current.children.set(`${item.name}:${item.path}`, {
+            kind: item.isPackage ? "package" : "file",
+            name: item.name,
+            path: item.path,
+            item,
+            fileCount: item.fileCount || 1,
+            size: item.size || 0,
+          });
+        }
+
+        aggregateDirectoryStats(root);
+        return root;
+      }
+
+      function aggregateDirectoryStats(node) {
+        if (node.kind !== "directory") {
+          return { fileCount: node.fileCount || 1, size: node.size || 0 };
+        }
+
+        let fileCount = 0;
+        let size = 0;
+        for (const child of node.children.values()) {
+          const stats = aggregateDirectoryStats(child);
+          fileCount += stats.fileCount;
+          size += stats.size;
+        }
+        node.fileCount = fileCount;
+        node.size = size;
+        return { fileCount, size };
+      }
+
+      function compareTreeNodes(a, b) {
+        const rank = { directory: 0, package: 1, file: 2 };
+        return rank[a.kind] - rank[b.kind] || a.name.localeCompare(b.name, "zh-Hans-CN");
+      }
+
+      function getTreeChildren(node) {
+        return [...node.children.values()].sort(compareTreeNodes);
+      }
+
+      function isUnsafePath(path) {
+        const course = path.split("/")[0];
+        if (path === course && state.unsafeCourses.has(course)) return true;
+        return [...state.unsafePackageRoots].some((root) => path === root || path.startsWith(`${root}/`) || root.startsWith(`${path}/`));
+      }
+
+      function renderDirectoryRow(node, depth) {
+        const unsafe = isUnsafePath(node.path);
+        const treeUrl = `${repoTreeBase}${encodePath(node.path)}`;
+        const downloadUrl = unsafe ? treeUrl : getDirectoryDownloadUrl(node.path);
+        return `
+          <div class="course-file-row directory-row" style="--depth: ${depth}">
+            <span class="file-kind">DIR</span>
+            <div class="file-main">
+              <div class="file-name">${escapeHtml(node.name)}</div>
+              <div class="file-meta">${node.fileCount} files · ${formatSize(node.size) || "folder"}</div>
+            </div>
+            <div class="file-links">
+              <a class="action-link" href="${treeUrl}" target="_blank" rel="noopener">查看</a>
+              <a class="action-link" href="${downloadUrl}" target="_blank" rel="noopener">${unsafe ? "目录" : "整包"}</a>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderFileRow(item, depth) {
+        return `
+          <div class="course-file-row" style="--depth: ${depth}">
+            <span class="file-kind">${escapeHtml(item.type)}</span>
+            <div class="file-main">
+              <div class="file-name">${escapeHtml(item.name)}</div>
+              <div class="file-meta">${escapeHtml(getFileMeta(item))}</div>
+            </div>
+            <div class="file-links">
+              <a class="action-link" href="${item.html_url}" target="_blank" rel="noopener">查看</a>
+              <a class="action-link" href="${item.download_url}" target="_blank" rel="noopener">${item.isPackage ? item.unsafe ? "目录" : "整包" : "下载"}</a>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderTreeRows(node, depth = 0) {
+        return getTreeChildren(node).map((child) => {
+          if (child.kind === "directory") {
+            return `${renderDirectoryRow(child, depth)}${renderTreeRows(child, depth + 1)}`;
+          }
+          return renderFileRow(child.item, depth);
+        }).join("");
       }
 
       function renderCourseIndex(resources) {
@@ -249,6 +370,7 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
           const typeCounts = countBy(group.files, "type").slice(0, 4);
           const courseDownloadUrl = getDirectoryDownloadUrl(group.course);
           const canDownloadCourse = !state.unsafeCourses.has(group.course);
+          const courseTree = buildCourseTree(group.course, group.files);
           return `
             <article class="course-column" aria-label="${escapeHtml(group.course)}">
               <header class="course-column-header">
@@ -265,19 +387,7 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
                 </div>
               </header>
               <div class="course-file-list">
-                ${group.files.map((item) => `
-                  <div class="course-file-row">
-                    <span class="file-kind">${escapeHtml(item.type)}</span>
-                    <div class="file-main">
-                      <div class="file-name">${escapeHtml(item.name)}</div>
-                      <div class="file-meta">${escapeHtml(getFileMeta(item))}</div>
-                    </div>
-                    <div class="file-links">
-                      <a class="action-link" href="${item.html_url}" target="_blank" rel="noopener">查看</a>
-                      <a class="action-link" href="${item.download_url}" target="_blank" rel="noopener">${item.isPackage ? item.unsafe ? "目录" : "整包" : "下载"}</a>
-                    </div>
-                  </div>
-                `).join("")}
+                ${renderTreeRows(courseTree)}
               </div>
             </article>
           `;
@@ -290,8 +400,9 @@ const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing
       }
 
       function getFileMeta(item) {
-        if (item.isPackage) return `${item.fileCount || 0} files · ${formatSize(item.size) || "package"}`;
-        return formatSize(item.size) || item.ext || "file";
+        const location = item.parentPath || "课程根目录";
+        if (item.isPackage) return `${location} · ${item.fileCount || 0} files · ${formatSize(item.size) || "package"}`;
+        return `${location} · ${formatSize(item.size) || item.ext || "file"}`;
       }
 
       function renderResources(resources) {
