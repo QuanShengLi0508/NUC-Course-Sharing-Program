@@ -1,5 +1,5 @@
 const repoApi = "https://api.github.com/repos/QuanShengLi0508/NUC-Course-Sharing-Program/git/trees/main?recursive=1";
-      const localIndexUrl = "./data/resource-index.json?v=20260620";
+      const localIndexUrl = "./data/resource-index.json";
       const repoBlobBase = "https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program/blob/main/";
       const repoTreeBase = "https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program/tree/main/";
       const githubRawBase = "https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program/raw/main/";
