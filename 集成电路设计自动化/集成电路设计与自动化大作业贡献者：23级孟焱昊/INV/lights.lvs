@@ -1,0 +1,84 @@
+File written by LVS 8.40/Win32 as a result of: "C:\Tanner\LEdit84\Samples\SPR\example1\lights.vdb" on Tue Nov 20 08:40:00 2001
+
+Command line:
+lvs C:\Tanner\LEdit84\Samples\SPR\example1\lights.spc C:\Tanner\LEdit84\Samples\SPR\example1\lights_tpr.sp -o C:\Tanner\LEdit84\Samples\SPR\example1\lights.lvs -l C:\Tanner\LEdit84\Samples\SPR\example1\lights.lst -nrcl -O -c2 -dg5.000 -vfa -faf 
+
+Engine configuration report:
+Consider Bulk nodes..........................................................ON
+Consider Resistors as polarized elements.....................................OFF
+Consider Capacitors as polarized elements....................................OFF
+Consider Inductors as polarized elements.....................................OFF
+Merge series, parallel R and C, parallel MOSFETs. Delete shorted devices.....ON
+Merge series MOSFETs.........................................................OFF
+Find series MOSFETs that differ in order.....................................OFF
+Fast Iteration...............................................................OFF
+Parameter comparison threshold for MOSFET GATE LENGTHS.......................5%
+Parameter comparison threshold for MOSFET GATE WIDTHS........................5%
+
+
+Parsing file C:\Tanner\LEdit84\Samples\SPR\example1\lights.spc...
+Including file C:\Tanner\LEdit84\Samples\SPR\example1\ext_devc.md
+Flattening netlist...
+
+Parsing file C:\Tanner\LEdit84\Samples\SPR\example1\lights_tpr.sp...
+Including file C:\Tanner\LEdit84\Samples\SPR\example1\ext_devc.md
+Warning: lights_tpr.sp(189): Ignoring unrecognizable parameter TC1
+Warning: lights_tpr.sp(189): Ignoring unrecognizable parameter TC2
+Flattening netlist...
+
+Device                      lights.spc     lights_tpr.sp   Status            
+---------------        ---------------   ---------------   ---------------     
+M_PMOS                             398               218   MISMATCH (180)
+C                                   14                14
+R                                   12                12
+M_NMOS                             367               211   MISMATCH (156)
+Total elements                     791               455   MISMATCH (336)
+Total nodes                        227               227
+
+Merging devices...
+Eliminated from lights.spc:
+     1 shorted capacitor(s)
+   338 parallel MOSFET(s)
+Eliminated from lights_tpr.sp:
+     1 shorted capacitor(s)
+     2 parallel MOSFET(s)
+
+Device                      lights.spc     lights_tpr.sp   Status            
+---------------        ---------------   ---------------   ---------------     
+M_PMOS                             216               216
+C                                   13                13
+R                                   12                12
+M_NMOS                             211               211
+Total elements                     452               452
+Total nodes                        227               227
+
+Iterating...
+5% done
+10% done
+15% done
+20% done
+25% done
+30% done
+35% done
+40% done
+45% done
+50% done
+55% done
+60% done
+65% done
+70% done
+75% done
+80% done
+85% done
+90% done
+95% done
+100% done
+
+***************************** FINAL RESULT ********************************
+
+Note: Devices have been merged.
+Circuits are equal.
+Run time: 0:00 (min:sec)
+
+
+	0 error(s), 2 warning(s)

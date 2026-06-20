@@ -1,0 +1,60 @@
+T-Spice - Tanner SPICE
+Version 16.30
+Network license
+Product Release ID: T-Spice Win64 16.30.20150626.02:41:53
+Copyright © 1988-2015 Mentor Graphics Corporation
+
+	Parsing "D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\Cell0.spc"
+	Initializing parser from header file "D:\BAIDUN~1\tiburonda\models\VAdatabase.sp"
+	Reading library entry "tt" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+	Reading library entry "TT_NMOS_PARAMETERS" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+	Reading library entry "TT_PMOS_PARAMETERS" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+	Reading library entry "MOS_BIN_MODEL" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+	Reading library entry "Typ" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+	Reading library entry "RES_CAP" from "D:\BaiduNetdiskDownload\tanner1\NAND2\library\Models\Generic_025.lib"
+
+Start of Cell0.spc
+Loaded BSIM3v31 model library, Berkeley BSIM3 v3.1.0 with extensions
+Warning : "Cell0.spc" line 33 Power supply node In is singularly attached to VVoltageSource_2, and will be terminated with a Gmin conductance
+Warning : Node A is only attached to FET gate terminals; voltage is undefined
+Warning : Node B is only attached to FET gate terminals; voltage is undefined
+
+General options:
+        threads = 1
+
+ Device and node counts:
+              MOSFETs -       4
+    MOSFET geometries -       2
+      Voltage sources -       2
+   Subckt Definitions -       1
+     Subckt Instances -       0
+    Model Definitions -       2
+      Computed Models -       2
+    Independent nodes -       4
+       Boundary nodes -       3
+          Total nodes -       7
+*** 3 WARNING MESSAGES GENERATED DURING SETUP
+
+
+	Opening simulation database "D:\BaiduNetdiskDownload\tanner1\NAND2\wangbiao\Cell0.tsim"
+Warning : "Cell0.spc" line 42 Resetting minimum timestep from 1e-015 to 2.2e-012 to avoid numerical roundoff problems
+        : "Cell0.spc" line 42 Use the command '.options mintimestep=1e-015' to override this behavior (not recommended)
+
+Warning : Newton solver has failed due to extremely large node voltages.
+        : If the circuit has very high gain and extremely large voltages (>1000V) are expected,
+        : then you may use '.option vmax=0' to disable this check.
+Conventional DC operating point computation failed
+Final gmin value = 1e-006, dcstep = 100
+Gmin stepping failed
+Source stepping succeeded
+Simulation stopped by user during Transient analysis 3.9252m sec.
+
+Parsing                      0.04 seconds
+Setup                        0.03 seconds
+DC operating point           0.06 seconds
+Transient Analysis          85.40 seconds
+Output                       3.99 seconds
+-----------------------------------------
+Total                       86.09 seconds
+
+Simulation was stopped	with  5 Warnings

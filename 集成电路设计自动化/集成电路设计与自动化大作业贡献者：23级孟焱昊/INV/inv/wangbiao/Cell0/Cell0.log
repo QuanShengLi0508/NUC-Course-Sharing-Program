@@ -1,0 +1,45 @@
+T-Spice - Tanner SPICE
+Version 16.30
+Network license
+Product Release ID: T-Spice Win64 16.30.20150626.02:41:53
+Copyright © 1988-2015 Mentor Graphics Corporation
+
+	Parsing "D:\BaiduNetdiskDownload\example1\finv\wangbiao\Cell0.spc"
+	Initializing parser from header file "D:\BAIDUN~1\tiburonda\models\VAdatabase.sp"
+	Reading library entry "tt" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+	Reading library entry "TT_NMOS_PARAMETERS" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+	Reading library entry "TT_PMOS_PARAMETERS" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+	Reading library entry "MOS_BIN_MODEL" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+	Reading library entry "Typ" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+	Reading library entry "RES_CAP" from "D:\BaiduNetdiskDownload\example1\finv\library\Models\Generic_025.lib"
+
+Start of Cell0.spc
+Loaded BSIM3v31 model library, Berkeley BSIM3 v3.1.0 with extensions
+
+General options:
+        threads = 1
+
+ Device and node counts:
+              MOSFETs -       2
+    MOSFET geometries -       2
+      Voltage sources -       2
+   Subckt Definitions -       1
+     Subckt Instances -       0
+    Model Definitions -       2
+      Computed Models -       2
+    Independent nodes -       1
+       Boundary nodes -       3
+          Total nodes -       4
+
+	Opening simulation database "D:\BaiduNetdiskDownload\example1\finv\wangbiao\Cell0.tsim"
+
+Parsing                      0.91 seconds
+Setup                        0.40 seconds
+DC operating point           0.03 seconds
+Transient Analysis           0.97 seconds
+Output                       0.01 seconds
+Overhead                     1.18 seconds
+-----------------------------------------
+Total                        3.50 seconds
+
+Simulation completed

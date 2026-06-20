@@ -1,0 +1,29 @@
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -i -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o hs_da_map.ncd hs_da.ngd hs_da.pcf 
+par -w -intstyle ise -ol high -mt off hs_da_map.ncd hs_da.ncd hs_da.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml hs_da.twx hs_da.ncd -o hs_da.twr hs_da.pcf 
+bitgen -intstyle ise -f hs_da.ut hs_da.ncd 
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -i -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o hs_da_map.ncd hs_da.ngd hs_da.pcf 
+par -w -intstyle ise -ol high -mt off hs_da_map.ncd hs_da.ncd hs_da.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml hs_da.twx hs_da.ncd -o hs_da.twr hs_da.pcf 
+bitgen -intstyle ise -f hs_da.ut hs_da.ncd 
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -i -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o hs_da_map.ncd hs_da.ngd hs_da.pcf 
+par -w -intstyle ise -ol high -mt off hs_da_map.ncd hs_da.ncd hs_da.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml hs_da.twx hs_da.ncd -o hs_da.twr hs_da.pcf 
+bitgen -intstyle ise -f hs_da.ut hs_da.ncd 
+xst -intstyle ise -ifn "C:/IES111/dac/hs_da.xst" -ofn "C:/IES111/dac/hs_da.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc addaucf.ucf -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc addaucf.ucf -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc addaucf.ucf -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc addaucf.ucf -p xc6slx16-ftg256-2 hs_da.ngc hs_da.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o hs_da_map.ncd hs_da.ngd hs_da.pcf 
+par -w -intstyle ise -ol high -mt off hs_da_map.ncd hs_da.ncd hs_da.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml hs_da.twx hs_da.ncd -o hs_da.twr hs_da.pcf -ucf addaucf.ucf 
+bitgen -intstyle ise -f hs_da.ut hs_da.ncd 

@@ -1,0 +1,624 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.03 secs
+ 
+--> Reading design: hs_da.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "hs_da.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "hs_da"
+Output Format                      : NGC
+Target Device                      : xc6slx16-2-ftg256
+
+---- Source Options
+Top Module Name                    : hs_da
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"ipcore_dir"  }
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "C:\IES111\dac\ipcore_dir\rom_tri.v" into library work
+Parsing module <rom_tri>.
+Analyzing Verilog file "C:\IES111\dac\ipcore_dir\rom_squ.v" into library work
+Parsing module <rom_squ>.
+Analyzing Verilog file "C:\IES111\dac\ipcore_dir\rom_saw.v" into library work
+Parsing module <rom_saw>.
+Analyzing Verilog file "C:\IES111\dac\ipcore_dir\rom.v" into library work
+Parsing module <rom>.
+Parsing VHDL file "C:\IES111\dac\da_wave_send.vhd" into library work
+Parsing entity <da_wave_send>.
+Parsing architecture <trans> of entity <da_wave_send>.
+Parsing VHDL file "C:\IES111\dac\counter.vhd" into library work
+Parsing entity <counter>.
+Parsing architecture <Behavioral> of entity <counter>.
+Parsing VHDL file "C:\IES111\dac\hs_da.vhd" into library work
+Parsing entity <hs_da>.
+Parsing architecture <trans> of entity <hs_da>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <hs_da> (architecture <trans>) from library <work>.
+Going to verilog side to elaborate module rom
+
+Elaborating module <rom>.
+WARNING:HDLCompiler:1499 - "C:\IES111\dac\ipcore_dir\rom.v" Line 39: Empty module <rom> remains a black box.
+Back to vhdl to continue elaboration
+Going to verilog side to elaborate module rom_squ
+
+Elaborating module <rom_squ>.
+WARNING:HDLCompiler:1499 - "C:\IES111\dac\ipcore_dir\rom_squ.v" Line 39: Empty module <rom_squ> remains a black box.
+Back to vhdl to continue elaboration
+Going to verilog side to elaborate module rom_tri
+
+Elaborating module <rom_tri>.
+WARNING:HDLCompiler:1499 - "C:\IES111\dac\ipcore_dir\rom_tri.v" Line 39: Empty module <rom_tri> remains a black box.
+Back to vhdl to continue elaboration
+Going to verilog side to elaborate module rom_saw
+
+Elaborating module <rom_saw>.
+WARNING:HDLCompiler:1499 - "C:\IES111\dac\ipcore_dir\rom_saw.v" Line 39: Empty module <rom_saw> remains a black box.
+Back to vhdl to continue elaboration
+
+Elaborating entity <da_wave_send> (architecture <trans>) from library <work>.
+WARNING:HDLCompiler:92 - "C:\IES111\dac\da_wave_send.vhd" Line 34: rd_data should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\IES111\dac\da_wave_send.vhd" Line 36: rd_data2 should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\IES111\dac\da_wave_send.vhd" Line 38: rd_data3 should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "C:\IES111\dac\da_wave_send.vhd" Line 40: rd_data4 should be on the sensitivity list of the process
+INFO:HDLCompiler:679 - "C:\IES111\dac\da_wave_send.vhd" Line 41. Case statement is complete. others clause is never selected
+
+Elaborating entity <counter> (architecture <Behavioral>) from library <work>.
+WARNING:HDLCompiler:89 - "C:\IES111\dac\hs_da.vhd" Line 72: <ibufg> remains a black-box since it has no binding entity.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <hs_da>.
+    Related source file is "C:\IES111\dac\hs_da.vhd".
+    Summary:
+	no macro.
+Unit <hs_da> synthesized.
+
+Synthesizing Unit <da_wave_send>.
+    Related source file is "C:\IES111\dac\da_wave_send.vhd".
+    Found 8-bit register for signal <rd_addr_xhdl0>.
+    Found 8-bit register for signal <freq_cnt>.
+    Found 8-bit adder for signal <freq_adj> created at line 29.
+    Found 8-bit adder for signal <rd_addr_xhdl0[7]_GND_11_o_add_4_OUT> created at line 54.
+    Found 8-bit adder for signal <freq_cnt[7]_GND_11_o_add_5_OUT> created at line 56.
+    Found 8-bit 4-to-1 multiplexer for signal <da_data> created at line 32.
+    Found 8-bit comparator equal for signal <freq_cnt[7]_freq_adj[7]_equal_4_o> created at line 52
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  16 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   2 Multiplexer(s).
+Unit <da_wave_send> synthesized.
+
+Synthesizing Unit <counter>.
+    Related source file is "C:\IES111\dac\counter.vhd".
+    Found 2-bit register for signal <tempcounter>.
+    Found 2-bit adder for signal <tempcounter[1]_GND_12_o_add_1_OUT> created at line 20.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   2 D-type flip-flop(s).
+Unit <counter> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 5
+ 2-bit adder                                           : 2
+ 8-bit adder                                           : 3
+# Registers                                            : 4
+ 2-bit register                                        : 2
+ 8-bit register                                        : 2
+# Comparators                                          : 1
+ 8-bit comparator equal                                : 1
+# Multiplexers                                         : 2
+ 8-bit 2-to-1 multiplexer                              : 1
+ 8-bit 4-to-1 multiplexer                              : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Reading core <ipcore_dir/rom.ngc>.
+Reading core <ipcore_dir/rom_squ.ngc>.
+Reading core <ipcore_dir/rom_tri.ngc>.
+Reading core <ipcore_dir/rom_saw.ngc>.
+Loading core <rom> for timing and area information for instance <u_rom>.
+Loading core <rom_squ> for timing and area information for instance <u_rom2>.
+Loading core <rom_tri> for timing and area information for instance <u_rom3>.
+Loading core <rom_saw> for timing and area information for instance <u_rom4>.
+
+Synthesizing (advanced) Unit <counter>.
+The following registers are absorbed into counter <tempcounter>: 1 register on signal <tempcounter>.
+Unit <counter> synthesized (advanced).
+
+Synthesizing (advanced) Unit <da_wave_send>.
+The following registers are absorbed into counter <freq_cnt>: 1 register on signal <freq_cnt>.
+The following registers are absorbed into counter <rd_addr_xhdl0>: 1 register on signal <rd_addr_xhdl0>.
+Unit <da_wave_send> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 1
+ 8-bit adder                                           : 1
+# Counters                                             : 4
+ 2-bit up counter                                      : 2
+ 8-bit up counter                                      : 2
+# Comparators                                          : 1
+ 8-bit comparator equal                                : 1
+# Multiplexers                                         : 1
+ 8-bit 4-to-1 multiplexer                              : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <hs_da> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block hs_da, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 20
+ Flip-Flops                                            : 20
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : hs_da.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 84
+#      GND                         : 5
+#      INV                         : 7
+#      LUT1                        : 12
+#      LUT2                        : 2
+#      LUT3                        : 8
+#      LUT5                        : 3
+#      LUT6                        : 12
+#      MUXCY                       : 14
+#      VCC                         : 5
+#      XORCY                       : 16
+# FlipFlops/Latches                : 20
+#      FDC                         : 12
+#      FDCE                        : 8
+# RAMS                             : 4
+#      RAMB8BWER                   : 4
+# IO Buffers                       : 13
+#      IBUF                        : 1
+#      IBUFG                       : 3
+#      OBUF                        : 9
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16ftg256-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:              20  out of  18224     0%  
+ Number of Slice LUTs:                   44  out of   9112     0%  
+    Number used as Logic:                44  out of   9112     0%  
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:     44
+   Number with an unused Flip Flop:      24  out of     44    54%  
+   Number with an unused LUT:             0  out of     44     0%  
+   Number of fully used LUT-FF pairs:    20  out of     44    45%  
+   Number of unique control sets:         4
+
+IO Utilization: 
+ Number of IOs:                          13
+ Number of bonded IOBs:                  13  out of    186     6%  
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                2  out of     32     6%  
+    Number using Block RAM only:          2
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+sys_clk                            | IBUFG                  | 20    |
+key1                               | IBUFG                  | 2     |
+key2                               | IBUFG                  | 2     |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 4.157ns (Maximum Frequency: 240.573MHz)
+   Minimum input arrival time before clock: 4.008ns
+   Maximum output required time after clock: 6.905ns
+   Maximum combinational path delay: 6.384ns
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'sys_clk'
+  Clock period: 4.157ns (frequency: 240.573MHz)
+  Total number of paths / destination ports: 419 / 88
+-------------------------------------------------------------------------
+Delay:               4.157ns (Levels of Logic = 10)
+  Source:            u_da_wave_send/freq_cnt_6 (FF)
+  Destination:       u_da_wave_send/freq_cnt_7 (FF)
+  Source Clock:      sys_clk rising
+  Destination Clock: sys_clk rising
+
+  Data Path: u_da_wave_send/freq_cnt_6 to u_da_wave_send/freq_cnt_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.525   1.196  u_da_wave_send/freq_cnt_6 (u_da_wave_send/freq_cnt_6)
+     LUT5:I0->O            4   0.254   0.804  u_da_wave_send/freq_cnt[7]_freq_adj[7]_equal_4_o8_SW0 (N6)
+     LUT6:I5->O            1   0.254   0.681  u_da_wave_send/freq_cnt[7]_freq_adj[7]_equal_4_o_inv1 (u_da_wave_send/freq_cnt[7]_freq_adj[7]_equal_4_o_inv)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<0> (u_da_wave_send/Mcount_freq_cnt_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<1> (u_da_wave_send/Mcount_freq_cnt_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<2> (u_da_wave_send/Mcount_freq_cnt_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<3> (u_da_wave_send/Mcount_freq_cnt_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<4> (u_da_wave_send/Mcount_freq_cnt_cy<4>)
+     MUXCY:CI->O           1   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<5> (u_da_wave_send/Mcount_freq_cnt_cy<5>)
+     MUXCY:CI->O           0   0.023   0.000  u_da_wave_send/Mcount_freq_cnt_cy<6> (u_da_wave_send/Mcount_freq_cnt_cy<6>)
+     XORCY:CI->O           1   0.206   0.000  u_da_wave_send/Mcount_freq_cnt_xor<7> (u_da_wave_send/Mcount_freq_cnt7)
+     FDC:D                     0.074          u_da_wave_send/freq_cnt_7
+    ----------------------------------------
+    Total                      4.157ns (1.476ns logic, 2.681ns route)
+                                       (35.5% logic, 64.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'key1'
+  Clock period: 2.542ns (frequency: 393.391MHz)
+  Total number of paths / destination ports: 3 / 2
+-------------------------------------------------------------------------
+Delay:               2.542ns (Levels of Logic = 1)
+  Source:            u_counter1/tempcounter_0 (FF)
+  Destination:       u_counter1/tempcounter_0 (FF)
+  Source Clock:      key1 falling
+  Destination Clock: key1 falling
+
+  Data Path: u_counter1/tempcounter_0 to u_counter1/tempcounter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             10   0.525   1.007  u_counter1/tempcounter_0 (u_counter1/tempcounter_0)
+     INV:I->O              1   0.255   0.681  u_counter1/Mcount_tempcounter_xor<0>11_INV_0 (Result<0>)
+     FDC:D                     0.074          u_counter1/tempcounter_0
+    ----------------------------------------
+    Total                      2.542ns (0.854ns logic, 1.688ns route)
+                                       (33.6% logic, 66.4% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'key2'
+  Clock period: 2.444ns (frequency: 409.165MHz)
+  Total number of paths / destination ports: 3 / 2
+-------------------------------------------------------------------------
+Delay:               2.444ns (Levels of Logic = 1)
+  Source:            u_counter2/tempcounter_0 (FF)
+  Destination:       u_counter2/tempcounter_0 (FF)
+  Source Clock:      key2 falling
+  Destination Clock: key2 falling
+
+  Data Path: u_counter2/tempcounter_0 to u_counter2/tempcounter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              7   0.525   0.909  u_counter2/tempcounter_0 (u_counter2/tempcounter_0)
+     INV:I->O              1   0.255   0.681  u_counter2/Mcount_tempcounter_xor<0>11_INV_0 (Result<0>1)
+     FDC:D                     0.074          u_counter2/tempcounter_0
+    ----------------------------------------
+    Total                      2.444ns (0.854ns logic, 1.590ns route)
+                                       (34.9% logic, 65.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'sys_clk'
+  Total number of paths / destination ports: 16 / 16
+-------------------------------------------------------------------------
+Offset:              4.008ns (Levels of Logic = 2)
+  Source:            sys_rst_n (PAD)
+  Destination:       u_da_wave_send/freq_cnt_0 (FF)
+  Destination Clock: sys_clk rising
+
+  Data Path: sys_rst_n to u_da_wave_send/freq_cnt_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.681  sys_rst_n_IBUF (sys_rst_n_IBUF)
+     INV:I->O             20   0.255   1.285  sys_rst_n_inv1_INV_0 (sys_rst_n_inv)
+     FDC:CLR                   0.459          u_da_wave_send/freq_cnt_0
+    ----------------------------------------
+    Total                      4.008ns (2.042ns logic, 1.966ns route)
+                                       (50.9% logic, 49.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'key1'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              4.008ns (Levels of Logic = 2)
+  Source:            sys_rst_n (PAD)
+  Destination:       u_counter1/tempcounter_0 (FF)
+  Destination Clock: key1 falling
+
+  Data Path: sys_rst_n to u_counter1/tempcounter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.681  sys_rst_n_IBUF (sys_rst_n_IBUF)
+     INV:I->O             20   0.255   1.285  sys_rst_n_inv1_INV_0 (sys_rst_n_inv)
+     FDC:CLR                   0.459          u_counter1/tempcounter_0
+    ----------------------------------------
+    Total                      4.008ns (2.042ns logic, 1.966ns route)
+                                       (50.9% logic, 49.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'key2'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              4.008ns (Levels of Logic = 2)
+  Source:            sys_rst_n (PAD)
+  Destination:       u_counter2/tempcounter_0 (FF)
+  Destination Clock: key2 falling
+
+  Data Path: sys_rst_n to u_counter2/tempcounter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.681  sys_rst_n_IBUF (sys_rst_n_IBUF)
+     INV:I->O             20   0.255   1.285  sys_rst_n_inv1_INV_0 (sys_rst_n_inv)
+     FDC:CLR                   0.459          u_counter2/tempcounter_0
+    ----------------------------------------
+    Total                      4.008ns (2.042ns logic, 1.966ns route)
+                                       (50.9% logic, 49.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'key1'
+  Total number of paths / destination ports: 16 / 8
+-------------------------------------------------------------------------
+Offset:              5.835ns (Levels of Logic = 2)
+  Source:            u_counter1/tempcounter_0 (FF)
+  Destination:       da_data<7> (PAD)
+  Source Clock:      key1 falling
+
+  Data Path: u_counter1/tempcounter_0 to da_data<7>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             10   0.525   1.463  u_counter1/tempcounter_0 (u_counter1/tempcounter_0)
+     LUT6:I0->O            1   0.254   0.681  u_da_wave_send/Mmux_da_data11 (da_data_0_OBUF)
+     OBUF:I->O                 2.912          da_data_0_OBUF (da_data<0>)
+    ----------------------------------------
+    Total                      5.835ns (3.691ns logic, 2.144ns route)
+                                       (63.3% logic, 36.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'sys_clk'
+  Total number of paths / destination ports: 32 / 8
+-------------------------------------------------------------------------
+Offset:              6.905ns (Levels of Logic = 3)
+  Source:            u_rom2/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.WIDE_PRIM9.ram (RAM)
+  Destination:       da_data<7> (PAD)
+  Source Clock:      sys_clk rising
+
+  Data Path: u_rom2/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.WIDE_PRIM9.ram to da_data<7>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB8BWER:CLKBRDCLK->DOBDO9    1   2.100   0.958  U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.WIDE_PRIM9.ram (douta<7>)
+     end scope: 'u_rom2:douta<7>'
+     LUT6:I2->O            1   0.254   0.681  u_da_wave_send/Mmux_da_data81 (da_data_7_OBUF)
+     OBUF:I->O                 2.912          da_data_7_OBUF (da_data<7>)
+    ----------------------------------------
+    Total                      6.905ns (5.266ns logic, 1.639ns route)
+                                       (76.3% logic, 23.7% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               6.384ns (Levels of Logic = 3)
+  Source:            sys_clk (PAD)
+  Destination:       da_clk (PAD)
+
+  Data Path: sys_clk to da_clk
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUFG:I->O           17   1.328   1.208  IBUFG_inst1 (sys_clk_buff)
+     INV:I->O              1   0.255   0.681  u_da_wave_send/da_clk1_INV_0 (da_clk_OBUF)
+     OBUF:I->O                 2.912          da_clk_OBUF (da_clk)
+    ----------------------------------------
+    Total                      6.384ns (4.495ns logic, 1.889ns route)
+                                       (70.4% logic, 29.6% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock key1
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key1           |         |         |    2.542|         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock key2
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key2           |         |         |    2.444|         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock sys_clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+key2           |         |    3.495|         |         |
+sys_clk        |    4.157|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 2.60 secs
+ 
+--> 
+
+Total memory usage is 260332 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    9 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

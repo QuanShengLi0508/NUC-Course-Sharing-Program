@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="中北大学课程资料共享计划可视化目录">
+    <title>NUC Course Hub</title>
+    <link rel="stylesheet" href="./css/styles.css?v=20260527-search-left">
+  </head>
+  <body>
+    <div class="site-shell loading">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="NUC Course Hub">
+          <span class="brand-mark" aria-hidden="true">
+            <img src="./assets/nuc-emblem.jpg" alt="">
+          </span>
+          <span class="brand-title">
+            <strong>NUC Course Hub</strong>
+            <span>Course Sharing Program</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Live</span>
+          <a href="https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program">GitHub</a>
+          <a href="#resources">Files</a>
+          <a href="#contribute">Contribute</a>
+          <a href="#comments">Comments</a>
+          <div class="notification-widget">
+            <button class="notification-button" id="notificationButton" type="button" aria-label="通知" aria-expanded="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                <path d="M13.7 21a2 2 0 0 1-3.4 0"></path>
+              </svg>
+              <span class="notification-dot" id="notificationCount">0</span>
+            </button>
+            <div class="notification-panel" id="notificationPanel" hidden>
+              <div class="notification-head">
+                <strong>通知</strong>
+                <span>GitHub Issues</span>
+              </div>
+              <div class="notification-list" id="notificationList">
+                <p class="notification-empty">暂无新动态</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-lead">
+            <p class="eyebrow">[ 01 · COURSE ARCHIVE ]</p>
+            <h1 class="hero-title" aria-label="NUC-Course-Sharing-Program">NUC-Course-<br>Sharing-Program</h1>
+            <section class="control-panel" aria-label="Filters">
+              <div class="panel-title">
+                <h2>搜索</h2>
+                <span>Find</span>
+              </div>
+              <div class="filters">
+                <div class="field">
+                  <label for="searchInput">关键词</label>
+                  <input class="input-line" id="searchInput" type="search" placeholder="课程名 / 文件名 / pdf / 试卷">
+                </div>
+                <div class="filter-grid">
+                  <div class="field">
+                    <label for="courseFilter">课程</label>
+                    <select class="input-line" id="courseFilter">
+                      <option value="">全部课程</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="typeFilter">类型</label>
+                    <select class="input-line" id="typeFilter">
+                      <option value="">全部类型</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="command-stack">
+            <section class="terminal-card" aria-label="Repository status">
+              <div class="terminal-header">
+                <div class="lights" aria-hidden="true">
+                  <span style="background: var(--red)"></span>
+                  <span style="background: var(--yellow)"></span>
+                  <span style="background: var(--green)"></span>
+                </div>
+                <span>README · Project Intro</span>
+              </div>
+              <div class="terminal-body" id="terminalLog" aria-live="polite">
+                <p class="readme-kicker">README.md</p>
+                <h2>中北大学课程攻略共享计划</h2>
+                <p class="terminal-muted">正在载入课程目录与项目介绍...</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Repository metrics">
+          <div class="metric-card">
+            <strong id="fileMetric">0</strong>
+            <span>Public Files</span>
+          </div>
+          <div class="metric-card">
+            <strong id="courseMetric">0</strong>
+            <span>Courses</span>
+          </div>
+          <div class="metric-card">
+            <strong id="typeMetric">0</strong>
+            <span>Types</span>
+          </div>
+          <div class="metric-card">
+            <strong id="shownMetric">0</strong>
+            <span>Shown</span>
+          </div>
+        </section>
+
+        <section class="directory-stage" id="resources">
+          <div class="directory-shell">
+            <div class="section-title">
+              <h2>Course Index 课程目录</h2>
+              <span id="resourceCount">0 files</span>
+            </div>
+            <div class="directory-toolbar">
+              <span>Swipe / Shift + Wheel · 每个课程一栏</span>
+              <span id="courseListCount">0 courses</span>
+            </div>
+            <div class="course-slider" id="courseSlider" aria-label="Sliding course directory"></div>
+            <div class="notice-panel empty-state" id="emptyState">
+              <p>没有匹配的资料。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="contribute-stage" id="contribute">
+          <div class="section-title">
+            <h2>贡献资料</h2>
+            <span>Upload</span>
+          </div>
+          <form class="submit-panel" id="contributionForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="contributorName">姓名</label>
+                <input class="input-line" id="contributorName" name="contributorName" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="studentId">学号</label>
+                <input class="input-line" id="studentId" name="studentId" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="courseName">课程</label>
+                <input class="input-line" id="courseName" name="courseName" required>
+              </div>
+              <div class="field">
+                <label for="contributionTitle">资料标题</label>
+                <input class="input-line" id="contributionTitle" name="contributionTitle" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="contributionLink">文件链接</label>
+              <input class="input-line" id="contributionLink" name="contributionLink" placeholder="GitHub / 网盘 / 附件说明">
+            </div>
+            <div class="field">
+              <label for="contributionNote">备注</label>
+              <textarea class="input-line textarea-line" id="contributionNote" name="contributionNote"></textarea>
+            </div>
+            <label class="check-line">
+              <input id="anonymousContribution" name="anonymousContribution" type="checkbox">
+              <span>匿名贡献</span>
+            </label>
+            <button class="submit-button" type="submit">提交贡献</button>
+          </form>
+        </section>
+
+        <section class="comment-stage" id="comments">
+          <div class="section-title">
+            <h2>评论</h2>
+            <span>Discuss</span>
+          </div>
+          <form class="submit-panel" id="commentForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="commentName">姓名</label>
+                <input class="input-line" id="commentName" name="commentName" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="commentStudentId">学号</label>
+                <input class="input-line" id="commentStudentId" name="commentStudentId" inputmode="numeric">
+              </div>
+            </div>
+            <div class="field">
+              <label for="commentBody">内容</label>
+              <textarea class="input-line textarea-line" id="commentBody" name="commentBody" required></textarea>
+            </div>
+            <label class="check-line">
+              <input id="anonymousComment" name="anonymousComment" type="checkbox">
+              <span>匿名评论</span>
+            </label>
+            <button class="submit-button" type="submit">发表评论</button>
+          </form>
+          <div class="comment-feed" id="commentFeed" aria-live="polite"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · CC BY-NC-SA for original notes
+      </footer>
+    </div>
+
+    <script type="module" src="./js/app.js?v=20260527-search-left"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="rom">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2024-11-16T7:37:48</timestamp>
+    <pin polarity="Input" x="0" y="80" name="addra(7:0)" />
+    <pin polarity="Output" x="384" y="64" name="douta(7:0)" />
+    <pin polarity="Input" x="0" y="128" name="clka" />
+    <graph>
+        <rect width="320" x="32" y="32" height="172" />
+        <line x2="32" y1="80" y2="80" style="linewidth:W" x1="0" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="36" y="80" type="pin addra(7:0)" />
+        <line x2="352" y1="64" y2="64" style="linewidth:W" x1="384" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="348" y="64" type="pin douta(7:0)" />
+        <line x2="32" y1="128" y2="128" x1="0" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="36" y="128" type="pin clka" />
+        <text style="fontsize:40;fontname:Arial" x="148" y="12">rom</text>
+    </graph>
+</symbol>

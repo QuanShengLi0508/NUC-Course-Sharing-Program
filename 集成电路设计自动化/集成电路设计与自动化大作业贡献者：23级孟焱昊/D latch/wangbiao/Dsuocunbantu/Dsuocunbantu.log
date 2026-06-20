@@ -1,0 +1,41 @@
+T-Spice - Tanner SPICE
+Version 16.30
+Network license
+Product Release ID: T-Spice Win64 16.30.20150626.02:41:53
+Copyright © 1988-2015 Mentor Graphics Corporation
+
+	Parsing "D:\BaiduNetdiskDownload\tanner1\Dsuocun\wangbiao\Dsuocunbantu.spc"
+	Initializing parser from header file "D:\BAIDUN~1\tiburonda\models\VAdatabase.sp"
+Fatal Error : "Dsuocunbantu.spc" line 16 unknown keyword -> 
+Fatal Error : Error while parsing.   Will attempt to continue.
+Fatal Error : "Dsuocunbantu.spc" line 17 unknown keyword -> 
+Fatal Error : Error while parsing.   Will attempt to continue.
+Warning : No simulation commands found in input file.
+
+Start of Dsuocunbantu.spc
+Fatal Error : "Dsuocunbantu.spc" line 21 Could not resolve model "PMOS" referenced by "XU41.MU27/1"
+Fatal Error : "Dsuocunbantu.spc" line 22 Could not resolve model "NMOS" referenced by "XU41.MU29/1"
+Fatal Error : "Dsuocunbantu.spc" line 23 Could not resolve model "PMOS" referenced by "XU41.MU28/1"
+Fatal Error : "Dsuocunbantu.spc" line 24 Could not resolve model "NMOS" referenced by "XU41.MU30/1"
+Fatal Error : "Dsuocunbantu.spc" line 21 Could not resolve model "PMOS" referenced by "XU38.MU27/1"
+Fatal Error : "Dsuocunbantu.spc" line 22 Could not resolve model "NMOS" referenced by "XU38.MU29/1"
+Fatal Error : "Dsuocunbantu.spc" line 23 Could not resolve model "PMOS" referenced by "XU38.MU28/1"
+Fatal Error : "Dsuocunbantu.spc" line 24 Could not resolve model "NMOS" referenced by "XU38.MU30/1"
+Fatal Error : "Dsuocunbantu.spc" line 21 Could not resolve model "PMOS" referenced by "XU40.MU27/1"
+Fatal Error : "Dsuocunbantu.spc" line 22 Could not resolve model "NMOS" referenced by "XU40.MU29/1"
+Fatal Error : "Dsuocunbantu.spc" line 23 Could not resolve model "PMOS" referenced by "XU40.MU28/1"
+Fatal Error : "Dsuocunbantu.spc" line 24 Could not resolve model "NMOS" referenced by "XU40.MU30/1"
+Fatal Error : "Dsuocunbantu.spc" line 21 Could not resolve model "PMOS" referenced by "XU39.MU27/1"
+Fatal Error : "Dsuocunbantu.spc" line 22 Could not resolve model "NMOS" referenced by "XU39.MU29/1"
+Fatal Error : "Dsuocunbantu.spc" line 23 Could not resolve model "PMOS" referenced by "XU39.MU28/1"
+Fatal Error : "Dsuocunbantu.spc" line 24 Could not resolve model "NMOS" referenced by "XU39.MU30/1"
+Fatal Error : "Dsuocunbantu.spc" line 36 Could not resolve model "NMOS" referenced by "XU37.MU22/1"
+Fatal Error : "Dsuocunbantu.spc" line 37 Could not resolve model "PMOS" referenced by "XU37.MU21/1"
+
+Parsing                      0.04 seconds
+Setup                        0.10 seconds
+Overhead                     1.09 seconds
+-----------------------------------------
+Total                        1.25 seconds
+
+Simulation failed	with  1 Warning  22 Fatal Errors

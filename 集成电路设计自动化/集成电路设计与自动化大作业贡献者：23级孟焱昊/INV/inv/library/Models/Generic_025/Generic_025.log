@@ -1,0 +1,16 @@
+T-Spice - Tanner SPICE
+Version 16.30
+Network license
+Product Release ID: T-Spice Win64 16.30.20150626.02:41:53
+Copyright © 1988-2015 Mentor Graphics Corporation
+
+	Parsing "D:\BaiduNetdiskDownload\2025-2026-1EDA\tanner\Libraries\Libraries\Models\Generic_025.lib"
+	Initializing parser from header file "D:\BAIDUN~1\tiburonda\models\VAdatabase.sp"
+Fatal Error : "Generic_025.lib" line 17 .include file "TT" not found!
+
+Parsing                      0.04 seconds
+Overhead                     0.46 seconds
+-----------------------------------------
+Total                        0.50 seconds
+
+Simulation failed	with  1 Fatal Error

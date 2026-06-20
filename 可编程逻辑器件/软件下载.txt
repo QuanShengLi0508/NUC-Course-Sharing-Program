@@ -1,0 +1,10 @@
+ise下载：通过百度网盘分享的文件：ISE14.7
+链接：https://pan.baidu.com/s/1mjhCYei82tHL2OkLqUlCxw?pwd=fpga 
+提取码：fpga 
+--来自百度网盘超级会员V5的分享
+
+Windows11可以下载但是无法仿真，推荐用虚拟机下载，安装教程请看：【虚拟机VMware16.2.4_操作系统win10X64_可编程器件开发软件Xilinx_ISE14.7安装教程】https://www.bilibili.com/video/BV1KY4y1A7rb?vd_source=83efdc6ecf80d86c063ea02a49f2cb76
+
+虚拟机与Windows10系统安装：https://pan.baidu.com/s/1hb7Smah3fYD1H4QmIu3DOQ 提取码: r97f （这里的ise不能用）
+
+安装好Win10后用上面的ise软件直接拖到虚拟机上，经过一系列破解就能用了，有手就行

@@ -1,0 +1,100 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : ad_da.vf
+// /___/   /\     Timestamp : 11/16/2024 15:52:10
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -sympath C:/IES111/dac/ipcore_dir -intstyle ise -family spartan6 -verilog C:/IES111/dac/ad_da.vf -w C:/IES111/dac/ad_da.sch
+//Design Name: ad_da
+//Device: spartan6
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module ad_da(ad_data, 
+             key1, 
+             key2, 
+             sys_clk, 
+             sys_rst_n, 
+             ad_clk, 
+             ad_out, 
+             da_clk, 
+             da_data);
+
+    input [7:0] ad_data;
+    input key1;
+    input key2;
+    input sys_clk;
+    input sys_rst_n;
+   output ad_clk;
+   output [7:0] ad_out;
+   output da_clk;
+   output [7:0] da_data;
+   
+   wire [7:0] XLXN_5;
+   wire [7:0] XLXN_6;
+   wire [7:0] XLXN_8;
+   wire [7:0] XLXN_9;
+   wire [7:0] XLXN_10;
+   wire [1:0] XLXN_13;
+   wire [1:0] XLXN_14;
+   wire XLXN_16;
+   wire XLXN_18;
+   wire XLXN_23;
+   wire XLXN_24;
+   
+   counter  XLXI_1 (.clk(XLXN_16), 
+                   .rst_n(sys_rst_n), 
+                   .q(XLXN_14[1:0]));
+   counter  XLXI_2 (.clk(XLXN_18), 
+                   .rst_n(sys_rst_n), 
+                   .q(XLXN_13[1:0]));
+   ad_wave_rec  XLXI_3 (.ad_data(ad_data[7:0]), 
+                       .clk(XLXN_24), 
+                       .rst_n(sys_rst_n), 
+                       .ad_clk(ad_clk), 
+                       .ad_out(ad_out[7:0]));
+   da_wave_send  XLXI_4 (.clk(XLXN_23), 
+                        .in1(XLXN_14[1:0]), 
+                        .in2(XLXN_13[1:0]), 
+                        .rd_data(XLXN_6[7:0]), 
+                        .rd_data2(XLXN_8[7:0]), 
+                        .rd_data3(XLXN_9[7:0]), 
+                        .rd_data4(XLXN_10[7:0]), 
+                        .rst_n(sys_rst_n), 
+                        .da_clk(da_clk), 
+                        .da_data(da_data[7:0]), 
+                        .rd_addr(XLXN_5[7:0]));
+   rom  XLXI_5 (.addra(XLXN_5[7:0]), 
+               .clka(XLXN_23), 
+               .douta(XLXN_6[7:0]));
+   rom_saw  XLXI_6 (.addra(XLXN_5[7:0]), 
+                   .clka(XLXN_23), 
+                   .douta(XLXN_8[7:0]));
+   rom_squ  XLXI_7 (.addra(XLXN_5[7:0]), 
+                   .clka(XLXN_23), 
+                   .douta(XLXN_9[7:0]));
+   rom_tri  XLXI_8 (.addra(XLXN_5[7:0]), 
+                   .clka(XLXN_23), 
+                   .douta(XLXN_10[7:0]));
+   BUFG  XLXI_9 (.I(XLXN_23), 
+                .O(XLXN_24));
+   (* IOSTANDARD = "DEFAULT" *) (* IBUF_DELAY_VALUE = "0" *) 
+   IBUFG  XLXI_11 (.I(key1), 
+                  .O(XLXN_16));
+   (* IOSTANDARD = "DEFAULT" *) (* IBUF_DELAY_VALUE = "0" *) 
+   IBUFG  XLXI_12 (.I(key2), 
+                  .O(XLXN_18));
+   (* IOSTANDARD = "DEFAULT" *) (* IBUF_DELAY_VALUE = "0" *) 
+   IBUFG  XLXI_13 (.I(sys_clk), 
+                  .O(XLXN_23));
+endmodule

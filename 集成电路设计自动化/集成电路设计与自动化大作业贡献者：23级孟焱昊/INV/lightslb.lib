@@ -1,0 +1,862 @@
+library (MOSIS_Orbit2um)
+{
+	pulling_resistance_unit : "1kohm";
+	capacitive_load_unit (1.0,ff);
+
+	cell(AO22) {
+		pin (A) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (C) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (D) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT) {
+			direction : output ;
+			capacitance : 16.9;     /* Does not includes the cell's intrinsic delay.  Physical capacitance. */
+			/*capacitance : 1437;*/ /* Includes the cell's intrinsic delay. */
+			timing() {
+				rise_resistance : 1.74;
+				fall_resistance : 1.37;
+			}
+		}
+	} /* AO22 */
+
+	cell(AOI22) {
+		pin (A) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (C) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (D) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT) {
+			direction : output;
+			timing() {
+				rise_resistance : 3.29;
+				fall_resistance : 2.90;
+			}
+		}
+	} /* AOI22 */
+
+	cell(BUF1) {
+		pin (A) {
+			direction : input;
+			capacitance : 60;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.60;
+				fall_resistance : 1.59;
+			}
+		}
+	} /* BUF1 */
+
+	cell(BUF4) {
+		pin (A) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 0.95;
+				fall_resistance : 0.90;
+			}
+		}
+	} /* BUF4 */
+
+	cell(BUFI4) {
+		pin (A) {
+			direction : input;
+			capacitance : 330;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 0.95;
+				fall_resistance : 0.90;
+			}
+		}
+	} /* BUFI4 */
+
+	cell(BUFZ) {
+		pin (OEB) {
+			direction : input;
+			capacitance : 200;
+		}
+		pin (A) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (OUT) {
+			direction : output;
+			timing() {
+				related_pin : "A" ;
+				rise_resistance : 1.87;
+				fall_resistance : 1.53;
+			}
+			timing() {
+				rise_resistance : 0.200;
+				fall_resistance : 0.960;
+				related_pin : "OEB";
+			}
+			timing() {
+				timing_type : "three_state_disable";
+				rise_resistance : 0.200;
+				fall_resistance : 0.960;
+				related_pin : "OEB";
+			}
+		}
+	} /* BUFZ */
+
+	cell(DFF) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (CLK) {
+			direction : input;
+			capacitance : 110;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 5.80;
+				fall_resistance : 4.99;
+				related_pin : "CLK" ;
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 4.33;
+				fall_resistance : 3.63;
+				related_pin : "CLK" ;
+			}
+		}
+	} /* DFF */
+
+	cell(DFFC) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 160;
+		}
+		pin (CLK) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (CLB) {
+			direction : input;
+			capacitance : 110;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.60;
+				fall_resistance : 1.71;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 1.23;
+				fall_resistance : 1.23;
+				related_pin : "CLB" ;
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.81;
+				fall_resistance : 3.93;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 3.27;
+				fall_resistance : 3.27;
+				related_pin : "CLB" ;
+			}
+		}
+	} /* DFFC */
+
+	cell(DFFP) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (CLK) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (PRB) {
+			direction : input;
+			capacitance : 130;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.62;
+				fall_resistance : 1.38;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 1.42;
+				fall_resistance : 1.42;
+				related_pin : "PRB" ;
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.74;
+				fall_resistance : 3.93;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 3.27;
+				fall_resistance : 3.27;
+				related_pin : "PRB" ;
+			}
+		}
+	} /* DFFP */
+
+	cell(DFFPC) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (CLK) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (PRB) {
+			direction : input;
+			capacitance : 130;
+		}
+		pin (CLB) {
+			direction : input;
+			capacitance : 210;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.62;
+				fall_resistance : 1.38;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 1.42;
+				fall_resistance : 1.42;
+				related_pin : "PRB" ;
+			}
+			timing() {
+				rise_resistance : 0.97;
+				fall_resistance : 0.97;
+				related_pin : "CLB" ;
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.74;
+				fall_resistance : 3.93;
+				related_pin : "CLK" ;
+			}
+			timing() {
+				rise_resistance : 3.37;
+				fall_resistance : 3.37;
+				related_pin : "PRB" ;
+			}
+			timing() {
+				rise_resistance : 2.17;
+				fall_resistance : 2.17;
+				related_pin : "CLB" ;
+			}
+		}
+	} /* DFFPC */
+
+	cell(INV) {
+		pin (A) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.75;
+				fall_resistance : 2.80;
+			}
+		}
+	} /* INV */
+
+	cell(INV2) {
+		pin (A) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.75;
+				fall_resistance : 2.80;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.75;
+				fall_resistance : 2.80;
+			}
+		}
+	} /* INV2 */
+
+	cell(INVZ) {
+		pin (A) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (OEB) {
+			direction : input;
+			capacitance : 200;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.87;
+				fall_resistance : 1.53;
+			}
+			timing() {
+				rise_resistance : 0.200;
+				fall_resistance : 0.960;
+				related_pin : "OEB";
+			}
+			timing() {
+				timing_type : "three_state_disable";
+				rise_resistance : 0.200;
+				fall_resistance : 0.960;
+				related_pin : "OEB";
+			}
+		}
+	} /* INVZ */
+
+	cell(LAT) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 50;
+		}
+		pin (GB) {
+			direction : input;
+			capacitance : 40;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.93;
+				fall_resistance : 3.93;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 3.92;
+				fall_resistance : 3.20;
+				related_pin : "GB";
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.44;
+				fall_resistance : 1.44;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 1.74;
+				fall_resistance : 1.44;
+				related_pin : "GB";
+			}
+		}
+	} /* LAT */
+
+	cell(LATC) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 50;
+		}
+		pin (GB) {
+			direction : input;
+			capacitance : 40;
+		}
+		pin (CLB) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.93;
+				fall_resistance : 3.93;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 3.92;
+				fall_resistance : 3.20;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 4.13;
+				fall_resistance : 4.13;
+				related_pin : "CLB";
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.44;
+				fall_resistance : 1.44;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 1.74;
+				fall_resistance : 1.44;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 2.40;
+				fall_resistance : 2.40;
+				related_pin : "CLB";
+			}
+		}
+	} /* LATC */
+
+	cell(LATP) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 50;
+		}
+		pin (GB) {
+			direction : input;
+			capacitance : 40;
+		}
+		pin (PRB) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.93;
+				fall_resistance : 3.93;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 3.92;
+				fall_resistance : 3.20;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 1.42;
+				fall_resistance : 1.42;
+				related_pin : "PRB";
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.44;
+				fall_resistance : 1.44;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 1.74;
+				fall_resistance : 1.44;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 3.37;
+				fall_resistance : 3.37;
+				related_pin : "PRB";
+			}
+		}
+	} /* LATP */
+
+	cell(LATPC) {
+		pin (DATA) {
+			direction : input;
+			capacitance : 50;
+		}
+		pin (GB) {
+			direction : input;
+			capacitance : 40;
+		}
+		pin (CLB) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (PRB) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (Q) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.93;
+				fall_resistance : 3.93;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 3.92;
+				fall_resistance : 3.20;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 4.13;
+				fall_resistance : 4.13;
+				related_pin : "CLB";
+			}
+			timing() {
+				rise_resistance : 1.42;
+				fall_resistance : 1.42;
+				related_pin : "PRB";
+			}
+		}
+		pin (QB) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.44;
+				fall_resistance : 1.44;
+				related_pin : "DATA";
+			}
+			timing() {
+				rise_resistance : 1.74;
+				fall_resistance : 1.44;
+				related_pin : "GB";
+			}
+			timing() {
+				rise_resistance : 2.40;
+				fall_resistance : 2.40;
+				related_pin : "CLB";
+			}
+			timing() {
+				rise_resistance : 3.37;
+				fall_resistance : 3.37;
+				related_pin : "PRB";
+			}
+		}
+	}
+
+	cell(MUX2) {
+		pin (A) {
+			direction : input;
+			capacitance : 60;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 70;
+		}
+		pin (SEL) {
+			direction : input;
+			capacitance : 130;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.29;
+				fall_resistance : 1.95;
+				related_pin : "A";
+			}
+			timing() {
+				rise_resistance : 2.26;
+				fall_resistance : 1.94;
+				related_pin : "B";
+			}
+			timing() {
+				rise_resistance : 2.00;
+				fall_resistance : 1.61;
+				related_pin : "SEL";
+			}
+		}
+	} /* MUX2 */
+
+	cell(NAND2) {
+		pin (A) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.26;
+				fall_resistance : 3.33;
+			}
+		}
+	} /* NAND2 */
+
+	cell(NAND2C) {
+		pin (A) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.41;
+				fall_resistance : 2.40;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 8.94;
+				fall_resistance : 9.32;
+			}
+		}
+	} /* NAND2C */
+
+	cell(NAND3) {
+		pin (A) {
+			direction : input;
+			capacitance : 110;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 110;
+		}
+		pin (C) {
+			direction : input;
+			capacitance : 110;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 1.84;
+				fall_resistance : 2.26;
+			}
+		}
+	} /* NAND3 */
+
+	cell(NAND3C) {
+		pin (A, B, C) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.28;
+				fall_resistance : 2.33;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 9.66;
+				fall_resistance : 8.83;
+			}
+		}
+	} /* NAND3C */
+
+	cell(NAND4) {
+		pin (A, B, C, D) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.23;
+				fall_resistance : 2.63;
+			}
+		}
+	} /* NAND4 */
+
+	cell(NAND4C) {
+		pin (A, B, C, D) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 5.82;
+				fall_resistance : 2.60;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 14.02;
+				fall_resistance : 9.32;
+			}
+		}
+	} /* NAND4C */
+
+	cell(NOR2) {
+		pin (A, B) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.15;
+				fall_resistance : 3.02;
+			}
+		}
+	} /* NOR2 */
+
+	cell(NOR2C) {
+		pin (A, B) {
+			direction : input;
+			capacitance : 70;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 3.16;
+				fall_resistance : 3.90;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 10.49;
+				fall_resistance : 11.03;
+			}
+		}
+	} /* NOR2C */
+
+	cell(NOR3) {
+		pin (A, B, C) {
+			direction : input;
+			capacitance : 70;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 4.33;
+				fall_resistance : 3.60;
+			}
+		}
+	} /* NOR3 */
+
+	cell(NOR3C) {
+		pin (A, B, C) {
+			direction : input;
+			capacitance : 70;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 4.17;
+				fall_resistance : 3.62;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 14.29;
+				fall_resistance : 13.08;
+			}
+		}
+	} /* NOR3C */
+
+	cell(NOR4) {
+		pin (A, B, C, D) {
+			direction : input;
+			capacitance : 70;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 5.52;
+				fall_resistance : 4.55;
+			}
+		}
+	} /* NOR4 */
+
+	cell(NOR4C) {
+		pin (A, B, C, D) {
+			direction : input;
+			capacitance : 80;
+		}
+		pin (OUT1) {
+			direction : output ;
+			timing() {
+				rise_resistance : 5.52;
+				fall_resistance : 4.55;
+			}
+		}
+		pin (OUT2) {
+			direction : output ;
+			timing() {
+				rise_resistance : 10.79;
+				fall_resistance : 9.68;
+			}
+		}
+	} /* NOR4C */
+
+	cell(XNOR2) {
+		pin (A) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 160;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.12;
+				fall_resistance : 1.70;
+			}
+		}
+	} /* XNOR2 */
+
+	cell(XOR2) {
+		pin (A) {
+			direction : input;
+			capacitance : 90;
+		}
+		pin (B) {
+			direction : input;
+			capacitance : 100;
+		}
+		pin (OUT) {
+			direction : output ;
+			timing() {
+				rise_resistance : 2.54;
+				fall_resistance : 2.61;
+			}
+		}
+	} /* XOR2 */
+}

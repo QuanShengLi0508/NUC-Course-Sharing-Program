@@ -1,0 +1,57 @@
+          
+   _          _        _
+   _ __¦ÆÆ  _ __¦ÆÆ¦¦¦_ ___¦ÆÆ¦__  
+    _____    _____ ¦¦¦¦¦ ____ ¦¦¦¦
+    ¦¦¦¦¦    ¦¦¦¦¦  ¦¦¦¦ ¦¦¦¦  ¦¦¦¦
+     ¦¦¦   ¦_ ¦¦¦¦  ¦¦¦¦ ¦¦¦¦  ¦¦¦¦¦
+    ¦¦¦¦  ¦¦¦¦¦¦¦¦  ¦¦¦¦¦¦¦¦¦  ¦¦¦¦¦
+    ÆÆÆÆ  ¦¦¦¦ ¦¦¦ ¦¦¦¦ ÆÆÆÆÆ _¦¦¦Æ  mg
+   Æ ÆÆÆÆ¦¦¦¦¦¦ ÆÆ ¦¦¦Æ Æ ÆÆÆÆÆÆ
+Æ ÆÆÆÆÆÆÆ   ÆÆ¦Æ Æ ÆÆ   ÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ Æ
+::          <LEGENDS NEVER DiE> 
+
+
+1. Install Tanner Tools 13. Choose Local license when asked.
+2. Put TannerTools_13_Corrector.exe to "Program Files\Tanner EDA\" and run it there.
+3. Run TannerTools_13_Calculator.exe and enter Ethernet ID Tanner Computer ID utility shows.
+4. Put lservrc created to:
+   4.1. "Program Files\Tanner EDA\Tanner Tools v13.0", 
+   4.2. "Program Files\Tanner EDA\Tanner Tools v13.0\VerilogA\vacomp\bin"
+   4.3. "Program Files\Tanner EDA\Tanner Tools v13.0\px\win32-2.6-i686\bin"
+   4.4. "Program Files\Tanner EDA\Tanner Tools v13.0\legacy" in case compatibility version installed.
+
+
+
+----------Installation procedure for Tanner Tools V13----------------
+
+Guys!! good news, i made it work finally. Firstly, don`t panic coz the softwares is working fine. Follow the steps
+
+[NOTE: This is for Vista, it holds good for XP as well)
+
+A) Once you install Tanner with 'local license' selection, paste the TannerTools_13_Corrector.exe (run as administrator for safety) in /Program Files/Tanner EDA (as directed in the text file) and run that.  ---> don`t paste it in Tanner Tools V13.0 folder, paste it in Tanner EDA folder, so you must have three files a)Tanner ToolsV13.0 b)Utilities and c)TannerTools_13_Corrector.exe in the Tanner EDA folder.
+
+B) Don`t open TannerTools_13_Calculator until i say so.
+
+C) Go to start>All programs>Tanner EDA>Tanner-Tools v13>L-Edit v13
+
+D) You will get license error---> in the error window, look out for ETH ID: ---->its like 10-3C3D1.
+
+E)Copy the ETH ID and paste it somewhere, like notepad.
+
+F) Now run the TannerTools_13_Calculator.exe and enter the ETH-ID (all in caps including '-' , for example 10-3C3D1)
+
+G) you will get a "lservrc" file in the same folder (atleast 9.6KB in size).
+
+H) Copy that and paste it in the places as mentioned in the .txt file in LEGEND folder. NOTE: don`t paste it in "Program Files\Tanner EDA\Tanner Tools v13.0\legacy" coz its not necessary.
+
+I) Now is the important step : right click on "My Computer" and click on 'properties' , in the 'system properties' go to 'Advanced' and click on 'Environment Variable'.
+
+J) In the 'user variables' (top part) click on 'New...' and type 'Variable Name' as 'LSERVRC' (without single quotes) and in the 'Variable Value' field -->type the location of the 'lscrvrc' file ( for example C:\Program Files\Tanner EDA\Tanner Tools v13.0\lservrc )
+
+Thats it, Enjoy the Legendary work done by LEGEND team!!
+
+Thank you LEGEND bros!!
+
+
+IMPORTANT: guyz plz note this--> I used to switch between two WLAN connections (home and Lab) so whenever i used to run tanner, it used to give me license error so i used to follow steps D to H as mentioned above. so get used to it. I am not sure if this happens, say, if you restart your comp/Laptop. so in any case step D to H should do the job. May the force be with you.
+

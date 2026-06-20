@@ -1,0 +1,20 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Sat Nov 16 15:11:24 2024
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "sys_clk" LOCATE = SITE "N8" LEVEL 1;
+COMP "da_data<0>" LOCATE = SITE "H11" LEVEL 1;
+COMP "da_data<1>" LOCATE = SITE "G12" LEVEL 1;
+COMP "da_data<2>" LOCATE = SITE "H13" LEVEL 1;
+COMP "da_data<3>" LOCATE = SITE "F13" LEVEL 1;
+COMP "key1" LOCATE = SITE "P5" LEVEL 1;
+COMP "da_data<4>" LOCATE = SITE "K11" LEVEL 1;
+COMP "key2" LOCATE = SITE "N5" LEVEL 1;
+COMP "da_data<5>" LOCATE = SITE "J12" LEVEL 1;
+COMP "da_data<6>" LOCATE = SITE "M13" LEVEL 1;
+COMP "da_data<7>" LOCATE = SITE "K12" LEVEL 1;
+COMP "sys_rst_n" LOCATE = SITE "G16" LEVEL 1;
+COMP "da_clk" LOCATE = SITE "J13" LEVEL 1;
+SCHEMATIC END;
+
