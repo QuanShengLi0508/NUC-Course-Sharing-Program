@@ -1,2 +1,0 @@
-#!/bin/csh
-vsim -novopt -do "view *; add wave *; run -all" top

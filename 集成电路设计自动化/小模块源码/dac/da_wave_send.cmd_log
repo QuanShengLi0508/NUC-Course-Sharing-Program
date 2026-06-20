@@ -1,3 +1,0 @@
-xst -intstyle ise -ifn "C:/IES111/dac/da_wave_send.xst" -ofn "C:/IES111/dac/da_wave_send.syr" 
-vhdtdtfi -lib work da_wave_send.vhd -prj dac -o da_wave_send.spl -module da_wave_send -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
-spl2sym -intstyle ise -family spartan6 da_wave_send.spl C:/IES111/dac/da_wave_send.sym 

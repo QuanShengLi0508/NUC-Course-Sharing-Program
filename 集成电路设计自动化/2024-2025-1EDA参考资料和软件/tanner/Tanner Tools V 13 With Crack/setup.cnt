@@ -1,7 +1,0 @@
-:Base setup.hlp
-:Title Setup of Tanner Tools Help
-1 About Setup=HIDD_WELCOME
-1 Application Setup=HIDD_SELECT_FILES
-1 License Management Setup=HIDD_SELECT_LICENSING
-1 Adobe Reader Setup=HIDD_SELECT_ACROBAT
-1 Application Server=HIDD_APP_SERVER

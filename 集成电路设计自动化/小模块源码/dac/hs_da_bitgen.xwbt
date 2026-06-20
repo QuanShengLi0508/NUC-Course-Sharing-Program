@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=C:\IES111\dac\hs_da.ncd
-OUTFILE=C:\IES111\dac\hs_da.bit
-FAMILY=Spartan6
-PART=xc6slx16-2ftg256
-WORKINGDIR=C:\IES111\dac
-LICENSE=WebPack
-USER_INFO=__0_0_0

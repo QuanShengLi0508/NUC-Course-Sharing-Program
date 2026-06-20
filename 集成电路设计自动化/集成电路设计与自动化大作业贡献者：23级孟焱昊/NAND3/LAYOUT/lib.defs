@@ -1,2 +1,0 @@
-DEFINE NAND3 NAND3
-ASSIGN NAND3 libMode shared

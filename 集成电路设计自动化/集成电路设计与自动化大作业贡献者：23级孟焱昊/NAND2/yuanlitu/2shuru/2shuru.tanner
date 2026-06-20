@@ -1,7 +1,0 @@
-workspace loadfrom -path .
-cell open -design 2shuru -cell Cell0 -type schematic -newwindow
-window move -left 160 -top 160 -width 1220 -height 607 -undock -max 
-window fit -x0 -3814 -y0 -3254 -x1 5435 -y1 2056 -units iu
-workspace dockinglayout load -file dockinglayout.xml
-source open.design -relativeto user -encoding utf-8
-source open.design -relativeto design -encoding utf-8

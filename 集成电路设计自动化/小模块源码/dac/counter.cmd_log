@@ -1,3 +1,0 @@
-xst -intstyle ise -ifn "C:/IES111/dac/counter.xst" -ofn "C:/IES111/dac/counter.syr" 
-vhdtdtfi -lib work counter.vhd -prj dac -o counter.spl -module counter -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
-spl2sym -intstyle ise -family spartan6 counter.spl C:/IES111/dac/counter.sym 

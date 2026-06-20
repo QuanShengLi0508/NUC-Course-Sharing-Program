@@ -1,8 +1,0 @@
-verilog work "ipcore_dir/rom_tri.v"
-verilog work "ipcore_dir/rom_squ.v"
-verilog work "ipcore_dir/rom_saw.v"
-verilog work "ipcore_dir/rom.v"
-vhdl work "da_wave_send.vhd"
-vhdl work "counter.vhd"
-vhdl work "ad_wave_rec.vhd"
-verilog work "ad_da.vf"
