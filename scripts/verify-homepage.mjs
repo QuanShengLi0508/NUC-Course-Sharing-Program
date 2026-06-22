@@ -1,8 +1,12 @@
 import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const css = readFileSync(new URL("../css/styles.css", import.meta.url), "utf8");
 const js = readFileSync(new URL("../js/app.js", import.meta.url), "utf8");
+const supabaseJs = readFileSync(new URL("../js/supabase.js", import.meta.url), "utf8");
+const swJs = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
 const indexJson = readFileSync(new URL("../data/resource-index.json", import.meta.url), "utf8");
 const resourceIndex = JSON.parse(indexJson);
 
@@ -10,38 +14,44 @@ const checks = [
   ["html", html, "NUC Course Hub"],
   ["html", html, "NUC-Course-<br>Sharing-Program"],
   ["html", html, "./assets/nuc-emblem.jpg"],
+  ["html", html, 'id="themeToggle"'],
   ["html", html, 'id="searchInput"'],
   ["html", html, 'id="courseFilter"'],
   ["html", html, 'id="typeFilter"'],
+  ["html", html, 'id="sortOrder"'],
   ["html", html, 'id="courseSlider"'],
+  ["html", html, 'id="ratings"'],
+  ["html", html, 'id="ratingForm"'],
   ["html", html, 'id="contribute"'],
   ["html", html, 'id="contributionForm"'],
   ["html", html, 'id="commentForm"'],
   ["html", html, 'id="notificationButton"'],
   ["html", html, 'id="notificationPanel"'],
   ["html", html, "匿名"],
-  ["html", html, 'href="./css/styles.css?v=20260527-search-left"'],
-  ["html", html, 'script type="module" src="./js/app.js?v=20260527-search-left"'],
+  ["html", html, 'href="./css/styles.css?v=20260527-full-upgrade"'],
+  ["html", html, 'script type="module" src="./js/app.js?v=20260527-full-upgrade"'],
+  ["html", html, 'navigator.serviceWorker.register("./sw.js")'],
   ["html", html, "README · Project Intro"],
   ["css", css, "--paper: #eee9dc"],
   ["css", css, "--paper-strong: #f8f3e8"],
   ["css", css, "--yellow: #f0b90b"],
-  ["css", css, "--shadow: 6px 6px 0 var(--line)"],
+  ["css", css, "--shadow: 4px 4px 0 var(--line)"],
   ["css", css, "margin: -12px 0 0"],
   ["css", css, "align-items: start"],
-  ["css", css, "color: #706b62"],
+  ["css", css, "color: var(--muted)"],
   ["css", css, ".brand-mark img"],
-  ["css", css, "object-position: left center"],
+  ["css", css, "object-position: center"],
   ["css", css, ".hero-title"],
   ["css", css, "transition: transform .14s ease"],
-  ["css", css, "transform: translate(4px, 4px)"],
-  ["css", css, ".course-file-row:focus-within"],
+  ["css", css, "transform: translate(-1px, -1px)"],
   ["css", css, ".directory-row"],
   ["css", css, "overflow-wrap: anywhere"],
-  ["css", css, "white-space: normal"],
   ["css", css, ".course-action-link"],
   ["css", css, ".contribute-stage"],
   ["css", css, ".comment-stage"],
+  ["css", css, ".rating-stage"],
+  ["css", css, ".theme-toggle"],
+  ["css", css, ".mobile-search-fab"],
   ["css", css, ".terminal-card"],
   ["css", css, "overflow-y: auto"],
   ["css", css, ".readme-kicker"],
@@ -59,12 +69,13 @@ const checks = [
   ["js", js, "downloadDirectoryBase"],
   ["js", js, "packageLikePattern"],
   ["js", js, "collapsePackageEntries"],
-  ["js", js, "initAutoSlide"],
-  ["js", js, "pauseAutoSlide"],
   ["js", js, "全部下载"],
   ["js", js, "openIssueUrl"],
-  ["js", js, "issuesApi"],
   ["js", js, "notificationKey"],
+  ["js", js, "themeToggle"],
+  ["js", js, "ratingForm"],
+  ["js", js, "supabaseInsert"],
+  ["js", js, "isConfigured"],
   ["js", js, "contributionForm"],
   ["js", js, "commentForm"],
   ["js", js, "download_url"],
@@ -81,6 +92,10 @@ const checks = [
   ["js", js, "escapeHtml"],
   ["js", js, "localIndexUrl"],
   ["js", js, "loadTreePayload"],
+  ["supabase", supabaseJs, "SUPABASE_URL"],
+  ["supabase", supabaseJs, "isConfigured"],
+  ["service-worker", swJs, "nuc-course-hub-v8"],
+  ["service-worker", swJs, "./js/supabase.js"],
   ["json", indexJson, '"tree"'],
   ["json", indexJson, '"generatedAt"'],
 ];
@@ -95,12 +110,15 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-try {
-  new Function(js);
-} catch (error) {
-  console.error("Homepage verification failed. js/app.js does not parse:");
-  console.error(error.message);
-  process.exit(1);
+for (const file of ["../js/app.js", "../js/supabase.js", "../sw.js"]) {
+  const result = spawnSync(process.execPath, ["--check", fileURLToPath(new URL(file, import.meta.url))], {
+    encoding: "utf8",
+  });
+  if (result.status !== 0) {
+    console.error(`Homepage verification failed. ${file} does not parse:`);
+    console.error(result.stderr || result.stdout);
+    process.exit(result.status || 1);
+  }
 }
 
 if (!Array.isArray(resourceIndex.tree) || resourceIndex.tree.length === 0) {

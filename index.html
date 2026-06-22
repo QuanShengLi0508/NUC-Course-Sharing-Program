@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="中北大学课程资料共享计划可视化目录">
     <title>NUC Course Hub</title>
-    <link rel="stylesheet" href="./css/styles.css?v=20260527-search-left">
+    <link rel="stylesheet" href="./css/styles.css?v=20260527-full-upgrade">
   </head>
   <body>
     <div class="site-shell loading">
@@ -19,12 +19,27 @@
             <span>Course Sharing Program</span>
           </span>
         </a>
+        <div class="topbar-search">
+          <input class="topbar-search-input" id="searchInput" type="search" placeholder="搜索课程名 / 文件名 / pdf / 试卷...">
+          <div class="quick-tags" id="quickTags">
+            <button type="button" class="quick-tag" data-query="试卷">试卷</button>
+            <button type="button" class="quick-tag" data-query="PPT">PPT</button>
+            <button type="button" class="quick-tag" data-query="期末">期末</button>
+            <button type="button" class="quick-tag" data-query="A4">A4纸</button>
+            <button type="button" class="quick-tag" data-query="复习">复习</button>
+            <button type="button" class="quick-tag" data-query="实验">实验</button>
+          </div>
+        </div>
         <nav class="nav" aria-label="Primary">
-          <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Live</span>
           <a href="https://github.com/QuanShengLi0508/NUC-Course-Sharing-Program">GitHub</a>
-          <a href="#resources">Files</a>
-          <a href="#contribute">Contribute</a>
-          <a href="#comments">Comments</a>
+          <a href="#resources">目录</a>
+          <a href="#contribute">贡献</a>
+          <a href="#ratings">评价</a>
+          <a href="#comments">留言</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换暗色模式">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
           <div class="notification-widget">
             <button class="notification-button" id="notificationButton" type="button" aria-label="通知" aria-expanded="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -35,8 +50,8 @@
             </button>
             <div class="notification-panel" id="notificationPanel" hidden>
               <div class="notification-head">
-                <strong>通知</strong>
-                <span>GitHub Issues</span>
+                <strong>动态</strong>
+                <span>Updates</span>
               </div>
               <div class="notification-list" id="notificationList">
                 <p class="notification-empty">暂无新动态</p>
@@ -53,14 +68,10 @@
             <h1 class="hero-title" aria-label="NUC-Course-Sharing-Program">NUC-Course-<br>Sharing-Program</h1>
             <section class="control-panel" aria-label="Filters">
               <div class="panel-title">
-                <h2>搜索</h2>
-                <span>Find</span>
+                <h2>筛选</h2>
+                <span>Filter</span>
               </div>
               <div class="filters">
-                <div class="field">
-                  <label for="searchInput">关键词</label>
-                  <input class="input-line" id="searchInput" type="search" placeholder="课程名 / 文件名 / pdf / 试卷">
-                </div>
                 <div class="filter-grid">
                   <div class="field">
                     <label for="courseFilter">课程</label>
@@ -74,6 +85,15 @@
                       <option value="">全部类型</option>
                     </select>
                   </div>
+                </div>
+                <div class="field">
+                  <label for="sortOrder">排序</label>
+                  <select class="input-line" id="sortOrder">
+                    <option value="files-desc">文件数多→少</option>
+                    <option value="files-asc">文件数少→多</option>
+                    <option value="name-asc">课程名 A→Z</option>
+                    <option value="name-desc">课程名 Z→A</option>
+                  </select>
                 </div>
               </div>
             </section>
@@ -123,7 +143,7 @@
               <span id="resourceCount">0 files</span>
             </div>
             <div class="directory-toolbar">
-              <span>Swipe / Shift + Wheel · 每个课程一栏</span>
+              <span>按课程整理资料、试卷与补充材料</span>
               <span id="courseListCount">0 courses</span>
             </div>
             <div class="course-slider" id="courseSlider" aria-label="Sliding course directory"></div>
@@ -133,10 +153,46 @@
           </div>
         </section>
 
+        <section class="rating-stage" id="ratings">
+          <div class="section-title">
+            <h2>课程评价</h2>
+            <span>Reviews</span>
+          </div>
+          <div class="rating-intro">
+            <p>分享你的课程体验，帮助后来的同学选课和备考。</p>
+          </div>
+          <form class="submit-panel" id="ratingForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="ratingCourse">课程名称</label>
+                <input class="input-line" id="ratingCourse" name="ratingCourse" required>
+              </div>
+              <div class="field">
+                <label for="ratingDifficulty">难度</label>
+                <select class="input-line" id="ratingDifficulty" name="ratingDifficulty">
+                  <option value="简单">简单 - 轻松过</option>
+                  <option value="中等" selected>中等 - 正常学能过</option>
+                  <option value="较难">较难 - 需要花时间</option>
+                  <option value="困难">困难 - 挂科率高</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="ratingTips">学习建议 / 复习重点</label>
+              <textarea class="input-line textarea-line" id="ratingTips" name="ratingTips" required placeholder="比如：重点看第3-5章，期末考计算题多，建议刷往年试卷..."></textarea>
+            </div>
+            <button class="submit-button" type="submit">提交评价</button>
+          </form>
+          <div class="rating-feed" id="ratingFeed"></div>
+        </section>
+
         <section class="contribute-stage" id="contribute">
           <div class="section-title">
             <h2>贡献资料</h2>
             <span>Upload</span>
+          </div>
+          <div class="contribute-guide">
+            <p>填写课程、资料标题和链接，维护者会按目录整理。</p>
           </div>
           <form class="submit-panel" id="contributionForm">
             <div class="form-grid">
@@ -171,6 +227,10 @@
             </label>
             <button class="submit-button" type="submit">提交贡献</button>
           </form>
+          <div class="contributors-section" id="contributorsSection">
+            <h3 class="contributors-title">贡献者</h3>
+            <div class="contributors-list" id="contributorsList"></div>
+          </div>
         </section>
 
         <section class="comment-stage" id="comments">
@@ -204,10 +264,24 @@
       </main>
 
       <footer class="footer">
-        GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · CC BY-NC-SA for original notes
+        <div class="footer-content">
+          <span>GitHub Pages · QuanShengLi0508/NUC-Course-Sharing-Program · CC BY-NC-SA for original notes</span>
+          <span class="footer-contact">联系维护者：18153838173（微信同号）</span>
+        </div>
       </footer>
+      <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+      </button>
+      <button class="mobile-search-fab" id="mobileSearchFab" type="button" aria-label="搜索">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
     </div>
 
-    <script type="module" src="./js/app.js?v=20260527-search-left"></script>
+    <script type="module" src="./js/app.js?v=20260527-full-upgrade"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
+    </script>
   </body>
 </html>
